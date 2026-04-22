@@ -1,0 +1,26 @@
+{
+  "name": "reearth-cms-hw",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web \"npm -w @hw/cli run dev:serve\" \"npm -w @hw/web run dev\"",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "eslint \"**/*.{ts,tsx}\" --no-error-on-unmatched-pattern",
+    "typecheck": "tsc -b && npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "eslint": "^9.18.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vitest": "^4.1.5"
+  }
+}

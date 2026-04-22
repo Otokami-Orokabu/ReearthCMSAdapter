@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/reearth-api-server" },
+    { "path": "./packages/reearth-api-server/scripts" },
+    { "path": "./packages/reearth-api-server/tests" },
+    { "path": "./apps/cli" },
+    { "path": "./apps/cli/tests" }
+  ]
+}
+
