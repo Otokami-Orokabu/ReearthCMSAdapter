@@ -1,0 +1,28 @@
+{
+  "name": "@hw/reearth-api-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "smoke": "tsx --env-file=../../apps/server/.env scripts/smoke.ts"
+  },
+  "dependencies": {
+    "@reearth/cms-api": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  }
+}
