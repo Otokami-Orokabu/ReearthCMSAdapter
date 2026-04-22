@@ -1,0 +1,28 @@
+{
+  "name": "@hw/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "reearth-cms": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsx --env-file=../../.env src/index.ts",
+    "dev:serve": "tsx watch --env-file=../../.env src/index.ts serve",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@hw/reearth-api-server": "*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "commander": "^13.1.0",
+    "cors": "^2.8.6",
+    "express": "^4.22.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.25",
+    "@types/node": "^25.6.0"
+  }
+}
