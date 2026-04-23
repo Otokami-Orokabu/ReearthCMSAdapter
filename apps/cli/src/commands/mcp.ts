@@ -1,24 +1,12 @@
 import type { Command } from 'commander';
-import { startMcpServer } from '../adapters/mcp.js';
+import { startMcpServer } from '../adapters/mcp/index.js';
 
 /**
- * `reearth-cms mcp`
+ * reearth-cms mcp
  *
- * Starts the MCP server on stdio. Intended to be launched by an MCP client
- * (Claude Code, Cursor, etc.) via a config entry such as:
- *
- * ```json
- * {
- *   "mcpServers": {
- *     "reearth-cms": {
- *       "command": "reearth-cms",
- *       "args": ["mcp"]
- *     }
- *   }
- * }
- * ```
- *
- * The adapter never writes to stdout except via the JSON-RPC transport.
+ * Start the MCP server on stdio. Intended to be launched by an MCP
+ * client via a config entry. The adapter writes only JSON-RPC frames
+ * to stdout; human-readable logs go to stderr.
  */
 export function registerMcpCommand(program: Command): void {
   program

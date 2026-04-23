@@ -9,10 +9,8 @@ interface Props {
   onSelect: (item: Item) => void;
 }
 
-/**
- * Base map style using GSI (国土地理院) standard raster tiles.
- * Free for commercial/personal use with attribution.
- */
+/** Base map style: GSI (地理院タイル) standard raster tiles. Free to
+ *  use with attribution. */
 const MAP_STYLE: StyleSpecification = {
   version: 8,
   sources: {
@@ -31,21 +29,16 @@ const INITIAL_CENTER: [number, number] = [136.9, 35.16];
 const INITIAL_ZOOM = 8;
 
 /**
- * Minimal MapLibre view that renders CMS items as markers.
- *
- * - Base map: GSI standard raster tiles
- * - Markers: items with `location = {type: 'Point', coordinates: [lng, lat]}`
- * - Interaction: marker click → `onSelect(item)`; external `selected` → flyTo
- *
- * Items without a Point location are ignored on the map (they still appear
- * in the Sidebar list).
+ * MapLibre view that renders CMS items as markers. Items without a
+ * valid Point location are skipped. Marker click calls onSelect; when
+ * `selected` changes, the map flies to the selected item's coordinates.
  */
 export function MapView({ items, selected, onSelect }: Props): React.ReactElement {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<maplibregl.Marker[]>([]);
 
-  // Initialize map once.
+  // Initialise the map once.
   useEffect(() => {
     if (containerRef.current === null) return;
     if (mapRef.current !== null) return;
@@ -102,10 +95,8 @@ export function MapView({ items, selected, onSelect }: Props): React.ReactElemen
   return <div ref={containerRef} style={{ flex: 1, height: '100%' }} />;
 }
 
-/**
- * Extract `[lng, lat]` from an item's `location` field, expecting GeoJSON Point.
- * Returns `null` for items without a valid Point location.
- */
+/** Extract [lng, lat] from an item's location field when it is a
+ *  GeoJSON Point. Returns null otherwise. */
 function extractPoint(item: Item): [number, number] | null {
   const loc: unknown = item.location;
   if (typeof loc !== 'object' || loc === null) return null;

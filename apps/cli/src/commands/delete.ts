@@ -3,10 +3,9 @@ import { createClient } from '@hw/reearth-api-server';
 import { loadConfig } from '../config.js';
 
 /**
- * `reearth-cms delete <id> [--yes]`
+ * reearth-cms delete <id> [--yes]
  *
- * Deletes an item via the Integration API. Destructive operation — prompts
- * for confirmation unless `--yes` is passed.
+ * Delete an item. Prompts for confirmation unless --yes is passed.
  */
 export function registerDeleteCommand(program: Command): void {
   program
@@ -29,10 +28,17 @@ export function registerDeleteCommand(program: Command): void {
 }
 
 /**
- * Minimal stdin prompt. Resolves to `true` on "y"/"Y"/"yes", `false` otherwise.
- * Avoids bringing in an interactive-prompt library for this single use.
+ * Minimal stdin prompt. Resolves to true on "y" / "yes" (case-insensitive),
+ * false otherwise. On non-TTY stdin (pipe / CI) the call exits with code
+ * 1 so the caller cannot hang waiting for input.
  */
 async function promptYesNo(question: string): Promise<boolean> {
+  if (process.stdin.isTTY !== true) {
+    process.stderr.write(
+      'error: delete requires --yes on non-interactive stdin (pipe / CI)\n',
+    );
+    process.exit(1);
+  }
   process.stdout.write(question);
   return new Promise<boolean>((resolve) => {
     const onData = (chunk: Buffer): void => {

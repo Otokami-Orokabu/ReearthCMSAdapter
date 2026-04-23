@@ -4,11 +4,11 @@ import { loadConfig } from '../config.js';
 import { parsePayload } from '../payload.js';
 
 /**
- * `reearth-cms create <model> [--data | --file | --title]`
+ * reearth-cms create <model> [--data | --file | --title]
  *
- * Creates a new item via the Integration API. Payload is supplied through
- * exactly one of: inline JSON (`--data`), JSON file (`--file`), or the
- * single-field shortcut (`--title`). See {@link parsePayload} for details.
+ * Create a new item via the Integration API. The payload source is
+ * exactly one of --data (inline JSON), --file (JSON file path), or
+ * --title (single-field shortcut).
  */
 export function registerCreateCommand(program: Command): void {
   program

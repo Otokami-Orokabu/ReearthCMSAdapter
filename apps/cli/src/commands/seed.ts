@@ -8,27 +8,17 @@ import {
 import { loadConfig } from '../config.js';
 import { parsePositiveInt, parseBboxOpt } from '../optParsers.js';
 
-/** Default bounding box: rough Japan mainland (ok for smoke / visual tests). */
+/** Default bounding box for random Point locations: rough Japan mainland. */
 const DEFAULT_BBOX: Bbox = [130.0, 33.0, 141.0, 42.0];
 
 /**
- * `reearth-cms seed <model> [--count N] [--bbox ...] [--category ...]`
+ * reearth-cms seed <model> [--count N] [--bbox ...] [--category ...]
+ *                          [--status ...]
  *
- * Bulk-creates items for testing pagination / maps / layer styling.
- * Each item has:
- *   - title    : `seed-<timestamp>-<index>`
- *   - location : random Point within `--bbox` (default: Japan mainland)
- *   - category : randomly picked from `--category`-separated list (if given)
- *
- * Creations are sequential to stay polite against the CMS; progress is
- * printed one line per item.
- *
- * **Caveats:**
- * - Items land as draft (Integration API behaviour). They will NOT appear
- *   in `reearth-cms list` / the Public API until published.
- * - `--category` / `--status` values must match CMS-defined `select`
- *   options exactly, else the CMS returns HTTP 400 per item. Omit these
- *   options if you are unsure of the valid values.
+ * Bulk-create items for testing. Each item gets a timestamped title, a
+ * random Point location within --bbox, and optional select values from
+ * --category / --status. Items land as draft and must be published to
+ * appear via the Public API.
  */
 export function registerSeedCommand(program: Command): void {
   program

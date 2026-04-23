@@ -1,5 +1,10 @@
 import type { ListOpts } from '@hw/reearth-api-server';
-import { parseBboxOpt, parseSortOpt, parsePositiveInt } from '../../optParsers.js';
+import {
+  parseBboxOpt,
+  parseNearOpt,
+  parseSortOpt,
+  parsePositiveInt,
+} from '../../optParsers.js';
 
 /**
  * Parse Express `req.query` into a Core {@link ListOpts}.
@@ -30,6 +35,9 @@ export function parseListQuery(query: unknown): ListOpts {
 
   const bbox = readString(q.bbox);
   if (bbox !== null) opts.bbox = parseBboxOpt(bbox);
+
+  const near = readString(q.near);
+  if (near !== null) opts.near = parseNearOpt(near);
 
   const sort = readString(q.sort);
   if (sort !== null) opts.sort = parseSortOpt(sort);

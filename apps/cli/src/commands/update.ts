@@ -4,10 +4,10 @@ import { loadConfig } from '../config.js';
 import { parsePayload } from '../payload.js';
 
 /**
- * `reearth-cms update <id> [--data | --file | --title]`
+ * reearth-cms update <id> [--data | --file | --title]
  *
- * Partially updates an existing item via the Integration API.
- * Only fields in the payload are modified; others remain untouched.
+ * Partial update: only fields listed in the payload are modified;
+ * others are kept as-is.
  */
 export function registerUpdateCommand(program: Command): void {
   program

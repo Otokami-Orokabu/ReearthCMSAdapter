@@ -1,6 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { filterByBbox, sortBy, slice } from '../src/filter.js';
-import type { Bbox } from '../src/types.js';
+import {
+  applyListOps,
+  filterByBbox,
+  filterByRadius,
+  haversineMeters,
+  sortBy,
+  slice,
+} from '../src/filter.js';
+import type { Bbox, NearSpec } from '../src/types.js';
 
 describe('filterByBbox', () => {
   const bbox: Bbox = [130, 33, 141, 42]; // Japan mainland-ish
@@ -56,6 +63,64 @@ describe('filterByBbox', () => {
   });
 });
 
+describe('haversineMeters', () => {
+  it('returns 0 for the same point', () => {
+    expect(haversineMeters(139.7, 35.7, 139.7, 35.7)).toBe(0);
+  });
+
+  it('approximates known distances (Tokyo ↔ Osaka, ~400km)', () => {
+    const tokyo: [number, number] = [139.7671, 35.6812];
+    const osaka: [number, number] = [135.5023, 34.6937];
+    const d = haversineMeters(tokyo[0], tokyo[1], osaka[0], osaka[1]);
+    // Known distance ≈ 400km, allow 10km tolerance for spherical approximation
+    expect(d).toBeGreaterThan(390_000);
+    expect(d).toBeLessThan(410_000);
+  });
+
+  it('is symmetric', () => {
+    const a = haversineMeters(139, 35, 135, 34);
+    const b = haversineMeters(135, 34, 139, 35);
+    expect(a).toBeCloseTo(b, 6);
+  });
+});
+
+describe('filterByRadius', () => {
+  const getCoords = (p: { lng: number; lat: number }): readonly [number, number] => [p.lng, p.lat];
+  const tokyo: NearSpec = { lng: 139.7671, lat: 35.6812, radius: 50_000 }; // 50km around Tokyo
+
+  it('keeps items within the radius', () => {
+    const shibuya = { lng: 139.7, lat: 35.66 }; // ~6km from center
+    const yokohama = { lng: 139.638, lat: 35.444 }; // ~30km from center
+    const items = [shibuya, yokohama];
+    expect(filterByRadius(items, tokyo, getCoords)).toHaveLength(2);
+  });
+
+  it('excludes items outside the radius', () => {
+    const nagoya = { lng: 136.906, lat: 35.181 }; // ~270km from Tokyo
+    const items = [nagoya];
+    expect(filterByRadius(items, tokyo, getCoords)).toHaveLength(0);
+  });
+
+  it('excludes items whose extractor returns null', () => {
+    const items: Array<{ lng: number; lat: number } | { noCoords: true }> = [
+      { lng: 139.7, lat: 35.66 },
+      { noCoords: true },
+    ];
+    const extract = (p: { lng: number; lat: number } | { noCoords: true }) =>
+      'lng' in p ? ([p.lng, p.lat] as const) : null;
+    expect(filterByRadius(items, tokyo, extract)).toHaveLength(1);
+  });
+
+  it('zero-radius keeps only an exact match', () => {
+    const spec: NearSpec = { lng: 139, lat: 35, radius: 0 };
+    const items = [
+      { lng: 139, lat: 35 },
+      { lng: 139.0001, lat: 35 },
+    ];
+    expect(filterByRadius(items, spec, getCoords)).toHaveLength(1);
+  });
+});
+
 describe('sortBy', () => {
   const getValue = (item: Record<string, unknown>, field: string): unknown => item[field];
 
@@ -98,6 +163,53 @@ describe('sortBy', () => {
     const ref = [...items];
     sortBy(items, { field: 't' }, getValue);
     expect(items).toEqual(ref);
+  });
+});
+
+describe('applyListOps', () => {
+  const items = [
+    { id: 'a', title: 'banana', lng: 139.7, lat: 35.7 }, // Tokyo
+    { id: 'b', title: 'apple', lng: 135.5, lat: 34.7 }, // Osaka
+    { id: 'c', title: 'cherry', lng: 0, lat: 0 }, // origin, outside any Japan bbox/near
+    { id: 'd', title: 'date' }, // no coords
+  ];
+  const getCoords = (i: (typeof items)[number]): readonly [number, number] | null =>
+    'lng' in i && 'lat' in i && i.lng !== undefined && i.lat !== undefined
+      ? [i.lng, i.lat]
+      : null;
+  const getField = (i: (typeof items)[number], f: string): unknown =>
+    (i as unknown as Record<string, unknown>)[f];
+
+  it('returns a copy when opts is undefined', () => {
+    const out = applyListOps(items, undefined, getCoords, getField);
+    expect(out).toHaveLength(items.length);
+    expect(out).not.toBe(items);
+  });
+
+  it('applies near then sort then limit in order', () => {
+    const near: NearSpec = { lng: 139, lat: 35, radius: 500_000 }; // ~500km from (139,35): Tokyo & Osaka
+    const out = applyListOps(
+      items,
+      { near, sort: { field: 'title' }, limit: 1 },
+      getCoords,
+      getField,
+    );
+    // Tokyo + Osaka pass near. Sorted ascending by title: apple(b), banana(a). Limit=1 → [b]
+    expect(out).toHaveLength(1);
+    expect(out[0]?.id).toBe('b');
+  });
+
+  it('bbox narrows after near (intersection)', () => {
+    const near: NearSpec = { lng: 139, lat: 35, radius: 1_000_000 };
+    const bbox: Bbox = [139, 35, 140, 36]; // only Tokyo
+    const out = applyListOps(items, { near, bbox }, getCoords, getField);
+    expect(out).toHaveLength(1);
+    expect(out[0]?.id).toBe('a');
+  });
+
+  it('sort without filters keeps every item', () => {
+    const out = applyListOps(items, { sort: { field: 'title' } }, getCoords, getField);
+    expect(out.map((x) => x.id)).toEqual(['b', 'a', 'c', 'd']); // apple, banana, cherry, date
   });
 });
 

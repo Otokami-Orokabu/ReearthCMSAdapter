@@ -1,16 +1,21 @@
 import { Router } from 'express';
 import type { ReearthClient } from '@hw/reearth-api-server';
+import { registerPathParamValidators } from './internal/middleware.js';
 
 /**
- * Router for `/api/models` (list) and `/api/models/:idOrKey` (detail).
+ * Router for /api/models.
  *
- * Both endpoints use the Integration API under the hood via the Core
- * (`listModels` / `getModel`).
+ *   GET /                         list all models (lightweight)
+ *   GET /:idOrKey                 model detail with merged schema
+ *   GET /:idOrKey/schema.json     raw JSON Schema
+ *
+ * The schema.json variant must be declared before the catch-all
+ * /:idOrKey so Express matches it first.
  */
 export function createModelsRouter(client: ReearthClient): Router {
   const router = Router();
+  registerPathParamValidators(router);
 
-  // GET /api/models — list all models (lightweight)
   router.get('/', async (_req, res, next) => {
     try {
       const models = await client.listModels();
@@ -20,12 +25,24 @@ export function createModelsRouter(client: ReearthClient): Router {
     }
   });
 
-  // GET /api/models/:idOrKey — model detail with schema
+  router.get('/:idOrKey/schema.json', async (req, res, next) => {
+    try {
+      const schema = await client.getJsonSchema(req.params.idOrKey);
+      if (schema === null) {
+        res.status(404).json({ error: 'Model schema not found' });
+        return;
+      }
+      res.json(schema);
+    } catch (err) {
+      next(err);
+    }
+  });
+
   router.get('/:idOrKey', async (req, res, next) => {
     try {
       const model = await client.getModel(req.params.idOrKey);
       if (model === null) {
-        res.status(404).json({ error: 'Not Found' });
+        res.status(404).json({ error: 'Model not found' });
         return;
       }
       res.json(model);

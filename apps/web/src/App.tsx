@@ -4,12 +4,9 @@ import { Sidebar } from './components/Sidebar.tsx';
 import { MapView } from './components/MapView.tsx';
 
 /**
- * Top-level shell: owns shared state and composes Sidebar + MapView.
- *
- * - Fetch: Sidebar triggers, App requests, both Sidebar (list) and MapView
- *   (markers) render the result.
- * - Select: either Sidebar list click or MapView marker click sets
- *   `selected`; the map flies to it, the sidebar highlights & shows detail.
+ * Top-level shell. Owns the shared state (current model, item list,
+ * selected item, loading / error flags) and composes Sidebar and
+ * MapView.
  */
 export function App(): React.ReactElement {
   const [model, setModel] = useState('hazzrd_reports');

@@ -1,18 +1,23 @@
-import type { CmsItem, CmsField, CmsPayload } from './types.js';
+import type { CmsItem, CmsFieldType, CmsPayload } from './types.js';
 
 /**
- * Convert a {@link CmsItem} (CMS's `fields: [{key, type, value}]` array) into
- * a flat domain-shaped object.
+ * Write-side field shape returned by toCmsFields. `type` stays strict so
+ * the external SDK accepts the array without a cast.
  *
- * The output spreads `id`, `createdAt`, `updatedAt` (when present) alongside
- * each field's `value` keyed by `key`. Field-level `type` information is
- * dropped; the caller supplies `T` as the intended domain shape.
+ * @internal
+ */
+type CmsWriteField = { key: string; type: CmsFieldType; value: unknown };
+
+/**
+ * Convert a CmsItem into a flat, domain-shaped object.
  *
- * @param item - Raw CMS item (typically returned by Integration API).
- * @returns Flat object typed as `T`.
+ * Spreads id, createdAt, updatedAt (when present) alongside each field's
+ * value keyed by the field's key. The caller supplies T as the intended
+ * domain shape; the final runtime-to-T cast lives inside this function.
  *
- * @remarks The final cast to `T` is an unavoidable ACL boundary conversion
- *   (runtime-shaped → user-defined static type). Kept scoped to this function.
+ * @remarks
+ * Lossy: metadataFields and referencedItems are dropped. Only top-level
+ * fields become properties on the returned object.
  */
 export function flattenFields<T>(item: CmsItem): T {
   const result: Record<string, unknown> = { id: item.id };
@@ -25,7 +30,7 @@ export function flattenFields<T>(item: CmsItem): T {
 }
 
 /**
- * Convert a {@link CmsPayload} dict into CMS-compatible `fields` array format.
+ * Convert a CmsPayload dict into the CMS fields array wire format.
  *
  * @example
  * toCmsFields({
@@ -37,7 +42,7 @@ export function flattenFields<T>(item: CmsItem): T {
  * //   { key: 'location', type: 'geometryObject', value: {...} }
  * // ]
  */
-export function toCmsFields(obj: CmsPayload): CmsField[] {
+export function toCmsFields(obj: CmsPayload): CmsWriteField[] {
   return Object.entries(obj).map(([key, spec]) => ({
     key,
     type: spec.type,
@@ -46,14 +51,12 @@ export function toCmsFields(obj: CmsPayload): CmsField[] {
 }
 
 /**
- * Build a GeoJSON Point geometry suitable for a `geometryObject` field.
+ * Build a GeoJSON Point geometry suitable for a geometryObject field.
  *
- * GeoJSON spec: coordinate order is `[longitude, latitude]` (x, y).
- * This is the OPPOSITE of many map libraries that use `[lat, lng]`, so be
- * careful when interoperating.
+ * Coordinate order is [longitude, latitude] (x, y) per the GeoJSON spec.
  *
- * @param lng - Longitude (-180 to 180).
- * @param lat - Latitude (-90 to 90).
+ * @param lng longitude in [-180, 180]
+ * @param lat latitude in [-90, 90]
  */
 export function makePointGeometry(
   lng: number,

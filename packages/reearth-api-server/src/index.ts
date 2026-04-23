@@ -1,13 +1,9 @@
 /**
- * Public entry for `@hw/reearth-api-server`.
+ * Public entry for @hw/reearth-api-server.
  *
- * This package is a thin wrapper (Anti-Corruption Layer) around the official
- * `@reearth/cms-api` SDK. It exposes a Primary Port ({@link ReearthClient})
- * that is stable against CMS-side schema evolution and SDK versioning.
- *
- * **Import policy**: consumers must import from THIS file only. Deep imports
- * into internal modules (`./client`, `./public`, `./integration`, etc.) are
- * forbidden and enforced by ESLint (`no-restricted-imports`).
+ * Consumers must import from this file only; deep imports into internal
+ * modules (./client, ./public, ./integration, ...) are forbidden and
+ * enforced by ESLint.
  *
  * @packageDocumentation
  */
@@ -15,6 +11,7 @@ export { createClient } from './client.js';
 export { ReearthApiError } from './errors.js';
 export { flattenFields, toCmsFields, makePointGeometry } from './mappers.js';
 export { CMS_FIELD_TYPE_VALUES } from './types.js';
+export { assertCmsPayload } from './validate.js';
 export type {
   ClientConfig,
   ReearthClient,
@@ -22,12 +19,15 @@ export type {
   CmsFieldType,
   CmsFieldSchema,
   CmsItem,
+  CmsJsonSchema,
   CmsModel,
   CmsModelDetail,
+  CmsAsset,
   CmsPayload,
   ListOpts,
   Bbox,
   SortSpec,
+  NearSpec,
   GeoJSONPoint,
   GeoJSONFeature,
   GeoJSONFeatureCollection,

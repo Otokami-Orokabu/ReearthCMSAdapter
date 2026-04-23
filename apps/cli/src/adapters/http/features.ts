@@ -1,34 +1,38 @@
 import { Router } from 'express';
 import type { ReearthClient } from '@hw/reearth-api-server';
-import { parseListQuery } from './query.js';
+import { registerPathParamValidators, withListOpts } from './internal/middleware.js';
 
 /**
- * Router for `/api/features/:model` — fetches items as GeoJSON
- * FeatureCollection via the Core's `listFeatures` (which in turn hits the
- * `.geojson` variant of the Re:Earth CMS Public API).
+ * Router for /api/features.
  *
- * Supports the same client-side filter / sort / offset / limit semantics
- * as `/api/items/:model` through query parameters.
+ *   GET /:model/bbox   bounding box of all Point-located items
+ *   GET /:model        FeatureCollection (shares query options with
+ *                      /api/items/:model)
  */
 export function createFeaturesRouter(client: ReearthClient): Router {
   const router = Router();
+  registerPathParamValidators(router);
 
-  router.get('/:model', async (req, res, next) => {
+  router.get('/:model/bbox', async (req, res, next) => {
     try {
-      const model = req.params.model;
-      let opts;
-      try {
-        opts = parseListQuery(req.query);
-      } catch (e) {
-        res.status(400).json({ error: e instanceof Error ? e.message : String(e) });
+      const bbox = await client.getBounds(req.params.model);
+      if (bbox === null) {
+        res.status(404).json({ error: 'No Point-located items in this model' });
         return;
       }
-      const fc = await client.listFeatures(model, opts);
-      res.type('application/geo+json').json(fc);
+      res.json({ bbox });
     } catch (err) {
       next(err);
     }
   });
+
+  router.get(
+    '/:model',
+    withListOpts<{ model: string }>(async (req, res, _next, opts) => {
+      const fc = await client.listFeatures(req.params.model, opts);
+      res.type('application/geo+json').json(fc);
+    }),
+  );
 
   return router;
 }

@@ -3,13 +3,12 @@ import { createClient } from '@hw/reearth-api-server';
 import { loadConfig } from '../config.js';
 
 /**
- * `reearth-cms model <id-or-key> [--json]`
+ * reearth-cms model <id-or-key> [--json]
  *
- * Fetch a single model with its schema (field definitions). Distinct from
- * `reearth-cms models` which lists all models without schema detail.
- *
- * Default output is a compact table of fields (key / type / required /
- * multiple); `--json` dumps the full CmsModelDetail.
+ * Fetch a single model with its schema. Default output is a compact
+ * table of fields (key, type, required, multiple); --json dumps the
+ * full CmsModelDetail object. Exits with code 1 when the model is not
+ * found.
  */
 export function registerModelCommand(program: Command): void {
   program
@@ -46,6 +45,15 @@ export function registerModelCommand(program: Command): void {
         ].filter((s) => s.length > 0);
         const tag = flags.length > 0 ? ` [${flags.join(',')}]` : '';
         process.stdout.write(`    ${f.key}\t${f.type}${tag}\t${f.name}\n`);
+        if (f.description !== undefined) {
+          process.stdout.write(`      description: ${f.description}\n`);
+        }
+        if (f.options !== undefined) {
+          process.stdout.write(`      options: ${f.options.join(', ')}\n`);
+        }
+        if (f.geoSupportedTypes !== undefined) {
+          process.stdout.write(`      geoSupportedTypes: ${f.geoSupportedTypes.join(', ')}\n`);
+        }
       }
     });
 }

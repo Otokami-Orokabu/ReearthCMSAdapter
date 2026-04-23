@@ -3,10 +3,10 @@ import { createClient } from '@hw/reearth-api-server';
 import { loadConfig } from '../config.js';
 
 /**
- * `reearth-cms models [--json]`
+ * reearth-cms models [--json]
  *
- * Lists all models in the configured project via the Integration API.
- * Default output is a compact three-column table (id / key / name).
+ * List all models in the configured project. Default output is a
+ * tab-separated table of id, key, name; --json prints the full array.
  */
 export function registerModelsCommand(program: Command): void {
   program

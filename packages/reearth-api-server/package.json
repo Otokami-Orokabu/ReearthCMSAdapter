@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsc -b",
     "clean": "rm -rf dist *.tsbuildinfo",
-    "smoke": "tsx --env-file=../../apps/server/.env scripts/smoke.ts"
+    "smoke": "tsx --env-file=../../.env scripts/smoke.ts"
   },
   "dependencies": {
     "@reearth/cms-api": "^0.2.0"

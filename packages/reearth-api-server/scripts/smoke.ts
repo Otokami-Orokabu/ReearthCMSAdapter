@@ -24,11 +24,6 @@ function requireEnv(key: string): string {
   return value;
 }
 
-function optionalEnv(key: string): string | undefined {
-  const value = process.env[key];
-  return value === undefined || value === '' ? undefined : value;
-}
-
 /**
  * Parse a CMS_MODEL env value into a list of model identifiers.
  * Accepts either `foo` (single) or `[foo,bar,baz]` (bracketed array).
@@ -49,20 +44,14 @@ const CREATE_PAYLOAD: CmsPayload = {
 };
 
 async function main(): Promise<void> {
-  const baseUrl = requireEnv('CMS_BASE_URL');
-  const workspace = requireEnv('CMS_WORKSPACE');
-  const project = requireEnv('CMS_PROJECT');
-  const integrationToken = requireEnv('CMS_INTEGRATION_TOKEN');
-  const publicToken = optionalEnv('CMS_PUBLIC_TOKEN');
   const models = parseModels(requireEnv('CMS_MODEL'));
   if (models.length === 0) throw new Error('CMS_MODEL must contain at least one model');
 
   const config: ClientConfig = {
-    baseUrl,
-    workspace,
-    project,
-    integrationToken,
-    ...(publicToken !== undefined ? { publicToken } : {}),
+    baseUrl: requireEnv('CMS_BASE_URL'),
+    workspace: requireEnv('CMS_WORKSPACE'),
+    project: requireEnv('CMS_PROJECT'),
+    integrationToken: requireEnv('CMS_INTEGRATION_TOKEN'),
   };
 
   const client = createClient(config);

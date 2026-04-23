@@ -3,10 +3,10 @@ import { createClient } from '@hw/reearth-api-server';
 import { loadConfig } from '../config.js';
 
 /**
- * `reearth-cms get <model> <id>`
+ * reearth-cms get <model> <id>
  *
- * Fetches a single item via the Public API. Exits with code 1 and a clear
- * message when the item is not found (HTTP 404 → `null`).
+ * Fetch a single item via the Public API and write it as JSON to stdout.
+ * Exits with code 1 when the item is not found.
  */
 export function registerGetCommand(program: Command): void {
   program

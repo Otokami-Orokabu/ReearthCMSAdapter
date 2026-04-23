@@ -13,11 +13,9 @@ interface Props {
 }
 
 /**
- * Left-hand info panel: model switch, fetch/create controls, item list,
- * and detail view of the selected item.
- *
- * State is owned by the parent (App); this component is presentational +
- * handles its own local form state (title draft).
+ * Left-hand info panel: model switcher, fetch / create controls, item
+ * list, and the selected item's detail view. State is owned by App;
+ * this component keeps only the local form state.
  */
 export function Sidebar(props: Props): React.ReactElement {
   const { model, setModel, items, selected, onFetch, onSelect, loading, error } = props;

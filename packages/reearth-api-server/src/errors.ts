@@ -1,27 +1,19 @@
-/**
- * Options for constructing a {@link ReearthApiError}.
- */
+/** Options for constructing a ReearthApiError. */
 export interface ReearthApiErrorOptions {
-  /**
-   * Underlying error if any (network failure, SDK throw, JSON parse error).
-   * Accessible via `error.cause` (standard `Error.cause`).
-   */
+  /** Underlying cause; exposed as error.cause. */
   cause?: unknown;
-  /** HTTP status code, when the error originated from an HTTP response. */
+  /** HTTP status code when the error originated from an HTTP response. */
   status?: number;
 }
 
 /**
- * Unified error type for all Re:Earth CMS access paths.
- *
- * Both Public API and Integration API callers throw this, so downstream code
- * only needs to `catch (e) { if (e instanceof ReearthApiError) ... }`.
- *
- * This is part of the Anti-Corruption Layer: the shape of CMS-side / SDK
- * errors is NOT exposed to callers. Map into this at the boundary.
+ * Unified error type thrown from the package. Callers can distinguish
+ * known (catchable) errors from unexpected ones with
+ * `err instanceof ReearthApiError`; HTTP status, when known, is on
+ * err.status.
  */
 export class ReearthApiError extends Error {
-  /** HTTP status code if applicable (from Integration API / Public API). */
+  /** HTTP status code if the error originated from an HTTP response. */
   public readonly status: number | undefined;
 
   constructor(message: string, options?: ReearthApiErrorOptions) {

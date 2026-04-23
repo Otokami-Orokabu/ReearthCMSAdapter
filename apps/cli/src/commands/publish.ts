@@ -3,11 +3,9 @@ import { createClient } from '@hw/reearth-api-server';
 import { loadConfig } from '../config.js';
 
 /**
- * `reearth-cms publish <model> <id>`
+ * reearth-cms publish <model> <id>
  *
- * Publishes a draft item so it becomes visible via the Public API.
- * Required model argument — the Integration API publish endpoint is
- * model-scoped.
+ * Publish a draft item so it becomes visible via the Public API.
  */
 export function registerPublishCommand(program: Command): void {
   program
