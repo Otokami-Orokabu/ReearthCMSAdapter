@@ -99,7 +99,35 @@ URL の末尾に `.geojson` を付けると、FeatureCollection 形式で返る:
 
 本プロジェクトの `listFeatures` Core 関数 / `reearth-cms features` CLI / MCP `list_features` tool / HTTP `/api/features/:model` ルートはこの variant を内部で叩いている。MapLibre / Leaflet / Mapbox に直接データソースとして渡せる形。
 
-## 7. Integration API の新方式 URL は `/api/{workspace}/projects/{project}/models/{model}/items`
+## 7. `select` / `tag` フィールドの選択肢は schema API からは取れない
+
+`getModel` で取得できる field schema は `{id, key, name, type, required, multiple}` のみで、**`select` / `tag` の選択肢 (options) は含まれない**。
+
+→ 有効値を知るには:
+- CMS 管理 UI から確認
+- 既存 item の値分布を `listItems` で取得して参考にする (例: `hazzrd_reports.category` は `disaster` / `other` しか観測されていない)
+
+これが原因で `seed --category "obstruction,..."` が 400 で弾かれる事例が発生する (本プロジェクトでも実測済)。
+
+## 8. `CmsFieldType` enum に入っていない CMS の field 型がある
+
+本 ACL が列挙している `CmsFieldType` に含まれない型が SDK の `valueType` には存在する:
+
+| SDK の valueType | 本 ACL での扱い |
+|---|---|
+| `checkbox` | 未対応 |
+| `group` (複数フィールドを集約する構造) | 未対応 |
+| `geometryEditor` (Point 以外の GeoJSON: LineString / Polygon) | 未対応 |
+
+`getModel` の schema を読むと、これらの型の field は `type: string` として露出する (本ACL は schema 側を緩い string にしているため OK)。ただし `create_item` / `update_item` のランタイムバリデータ `isCmsPayload` が CmsFieldType を enum として要求するため、**書き込み時にはバリデータが通らず 400 相当**。
+
+これらを書き込みたい場合は:
+- `CMS_FIELD_TYPE_VALUES` に追加して ACL を拡張
+- `toCmsFields` / バリデータを対応した型へ広げる
+
+**実例**: `hazzrd_reports.oos` が `geometryEditor` 型 (LineString 等の描画用)。Point のみ想定の現行 `makePointGeometry` ヘルパでは作れない。
+
+## 9. Integration API の新方式 URL は `/api/{workspace}/projects/{project}/models/{model}/items`
 
 `workspaces/` のような prefix は**無い** (古い OpenAPI スキーマにある `/workspaces/` は実 API で使われない)。
 
