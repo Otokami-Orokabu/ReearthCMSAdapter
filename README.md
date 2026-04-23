@@ -1,4 +1,4 @@
-# ReearthCMS_HW
+# Re:Earth CMS Adapter Hub
 
 **Re:Earth CMS Adapter Hub** — Re:Earth CMS の Public / Integration API を ACL で吸収し、**CLI / HTTP / MCP** の 3 プロトコルから同じ Core を呼び出せるようにする統合ゲートウェイ。
 

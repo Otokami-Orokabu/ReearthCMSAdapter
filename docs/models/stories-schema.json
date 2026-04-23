@@ -1,0 +1,44 @@
+{
+  "$id": "01kpx52facpr227ss4yy3vejb2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stories",
+  "description": "名所をテーマで束ねる特集記事",
+  "type": "object",
+  "properties": {
+    "title": {
+      "title": "特集名",
+      "description": "特集名 (例: 京都紅葉 10 選)",
+      "x-fieldType": "text",
+      "maxLength": 100,
+      "x-required": true,
+      "x-multiple": false,
+      "x-unique": false
+    },
+    "lead": {
+      "title": "リード",
+      "description": "1 文リード",
+      "x-fieldType": "textArea",
+      "maxLength": 300,
+      "x-required": true,
+      "x-multiple": false,
+      "x-unique": false
+    },
+    "hero_image": {
+      "title": "カバー画像",
+      "description": "カバー写真",
+      "x-fieldType": "asset",
+      "x-required": false,
+      "x-multiple": false,
+      "x-unique": false
+    },
+    "body": {
+      "title": "本文",
+      "description": "特集の本文 (Markdown)。名所は [名所名](/landmark/<id>) で参照",
+      "x-fieldType": "markdown",
+      "maxLength": 20000,
+      "x-required": false,
+      "x-multiple": false,
+      "x-unique": false
+    }
+  }
+}
