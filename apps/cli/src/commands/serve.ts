@@ -27,6 +27,9 @@ export function registerServeCommand(program: Command): void {
         process.stdout.write('[serve] GET  /api/items/:model\n');
         process.stdout.write('[serve] GET  /api/items/:model/:id\n');
         process.stdout.write('[serve] POST /api/items/:model\n');
+        process.stdout.write('[serve] GET  /api/features/:model\n');
+        process.stdout.write('[serve] GET  /api/models\n');
+        process.stdout.write('[serve] GET  /api/models/:idOrKey\n');
       });
     });
 }

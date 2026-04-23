@@ -3,6 +3,7 @@ import { listItemsPublic, getItemPublic } from './public.js';
 import { listFeaturesPublic } from './features.js';
 import {
   listModelsIntegration,
+  getModelIntegration,
   createItemIntegration,
   updateItemIntegration,
   deleteItemIntegration,
@@ -45,6 +46,9 @@ export function createClient(config: ClientConfig): ReearthClient {
   return {
     async listModels() {
       return listModelsIntegration(config);
+    },
+    async getModel(modelIdOrKey) {
+      return getModelIntegration(config, modelIdOrKey);
     },
     async listItems<T>(model: string, opts?: ListOpts): Promise<T[]> {
       return listItemsPublic<T>(config, model, opts);

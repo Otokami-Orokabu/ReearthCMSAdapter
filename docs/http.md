@@ -20,8 +20,10 @@ reearth-cms serve --port 8080
 | `GET` | `/api/items/:model/:id` | 単体 item 取得 | Public API |
 | `POST` | `/api/items/:model` | item 作成 (draft) | Integration API |
 | `GET` | `/api/features/:model` | **GeoJSON FeatureCollection** (`.geojson` variant) | Public API |
+| `GET` | `/api/models` | プロジェクト内の全モデル一覧 | Integration API |
+| `GET` | `/api/models/:idOrKey` | モデル詳細 (fields スキーマ込み) | Integration API |
 
-現時点で `update` / `delete` / `publish` / `models` は **HTTP に露出していません** (CLI・MCP からのみ利用可能)。必要性が生じたら追加します。
+現時点で `update` / `delete` / `publish` は **HTTP に露出していません** (CLI・MCP からのみ利用可能)。必要性が生じたら追加します。
 
 ### 共通クエリパラメータ (`list` / `features` で使える)
 
@@ -87,6 +89,27 @@ $ curl http://localhost:3000/api/features/hazzrd_reports
 # 大阪周辺 + タイトル降順 + 上位 30 件
 $ curl "http://localhost:3000/api/features/hazzrd_reports?bbox=135.3,34.5,135.8,34.9&sort=title:desc&limit=30"
 ```
+
+### `GET /api/models` / `GET /api/models/:idOrKey`
+
+```bash
+$ curl http://localhost:3000/api/models
+{ "models": [ { "id": "...", "key": "hazzrd_reports", "name": "..." }, ... ] }
+
+$ curl http://localhost:3000/api/models/hazzrd_reports
+{
+  "id": "01kpq9b...",
+  "key": "hazzrd_reports",
+  "name": "hazzrd_reports",
+  "fields": [
+    { "id": "...", "key": "title", "name": "タイトル", "type": "text", "required": false, "multiple": false },
+    { "id": "...", "key": "location", "name": "位置", "type": "geometryObject", ... },
+    ...
+  ]
+}
+```
+
+不明な model は 404 (`{"error":"Not Found"}`)。
 
 **MapLibre で直接使う例:**
 ```js

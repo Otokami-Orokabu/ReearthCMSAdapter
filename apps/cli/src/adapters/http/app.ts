@@ -4,6 +4,7 @@ import cors from 'cors';
 import { ReearthApiError, type ReearthClient } from '@hw/reearth-api-server';
 import { createItemsRouter } from './items.js';
 import { createFeaturesRouter } from './features.js';
+import { createModelsRouter } from './models.js';
 
 /**
  * Build a ready-to-listen Express {@link Application} that exposes the Core
@@ -27,6 +28,7 @@ export function createHttpApp(client: ReearthClient): Application {
 
   app.use('/api/items', createItemsRouter(client));
   app.use('/api/features', createFeaturesRouter(client));
+  app.use('/api/models', createModelsRouter(client));
 
   // Unified error handler — normalizes ReearthApiError into HTTP responses.
   app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {

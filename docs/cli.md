@@ -122,6 +122,26 @@ const fc = await (await fetch('/api/features/hazzrd_reports')).json();
 map.addSource('reports', { type: 'geojson', data: fc });
 ```
 
+### `reearth-cms model <id-or-key> [--json]`
+
+単一モデルを **スキーマ付き** で取得 (Integration API)。`reearth-cms models` は一覧、こちらは詳細。
+
+```bash
+reearth-cms model hazzrd_reports
+# hazzrd_reports (hazzrd_reports)
+#   id: 01kpq9bhyhjzsdszb13nz6yq7q
+#   fields (7):
+#     title	text	タイトル
+#     category	select	カテゴリ
+#     location	geometryObject	位置
+#     photos	asset [multiple]	写真
+#     ...
+
+reearth-cms model hazzrd_reports --json > schema.json
+```
+
+AI (MCP) や CLI ユーザーが `create_item` 前にフィールド構成を把握するのに使う。
+
 ### `reearth-cms models [--json]`
 
 プロジェクト内の全モデルを一覧 (Integration API)。`id\tkey\tname` 形式 or JSON。

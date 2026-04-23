@@ -1,5 +1,12 @@
 import { CMS, CMSError } from '@reearth/cms-api';
-import type { CmsItem, ClientConfig, CmsPayload, CmsModel } from './types.js';
+import type {
+  CmsItem,
+  ClientConfig,
+  CmsPayload,
+  CmsModel,
+  CmsModelDetail,
+  CmsFieldSchema,
+} from './types.js';
 import { toCmsFields } from './mappers.js';
 import { ReearthApiError } from './errors.js';
 
@@ -43,6 +50,90 @@ export async function listModelsIntegration(config: ClientConfig): Promise<CmsMo
   } catch (cause) {
     throw wrapIntegrationError('listModelsIntegration failed', cause);
   }
+}
+
+/**
+ * Get a single model with its schema via the Integration API.
+ *
+ * Maps the SDK's nested `Model.schema.fields[]` shape down to our
+ * {@link CmsModelDetail} with a flat `fields` array, dropping metadata
+ * like `schemaId` / `createdAt` that consumers rarely need.
+ *
+ * @returns the model detail, or `null` if the model does not exist.
+ *
+ * @internal — called by {@link createClient} only.
+ */
+export async function getModelIntegration(
+  config: ClientConfig,
+  modelIdOrKey: string,
+): Promise<CmsModelDetail | null> {
+  const cms = makeIntegrationClient(config);
+  try {
+    const raw = await cms.getModel({ modelIdOrKey });
+    if (
+      typeof raw.id !== 'string' ||
+      typeof raw.key !== 'string' ||
+      typeof raw.name !== 'string'
+    ) {
+      return null;
+    }
+    const detail: CmsModelDetail = {
+      id: raw.id,
+      key: raw.key,
+      name: raw.name,
+      fields: extractSchemaFields(raw.schema),
+    };
+    if (typeof raw.description === 'string' && raw.description.length > 0) {
+      detail.description = raw.description;
+    }
+    const titleField = raw.schema?.titleField;
+    if (typeof titleField === 'string' && titleField.length > 0) {
+      detail.titleField = titleField;
+    }
+    return detail;
+  } catch (cause) {
+    if (cause instanceof CMSError && cause.status === 404) return null;
+    throw wrapIntegrationError('getModelIntegration failed', cause);
+  }
+}
+
+/**
+ * Narrow the SDK's optional schema.fields[] into {@link CmsFieldSchema}[].
+ * Fields missing required string members are silently skipped.
+ */
+function extractSchemaFields(schema: unknown): CmsFieldSchema[] {
+  if (typeof schema !== 'object' || schema === null) return [];
+  const fields = (schema as { fields?: unknown }).fields;
+  if (!Array.isArray(fields)) return [];
+  const out: CmsFieldSchema[] = [];
+  for (const raw of fields) {
+    if (typeof raw !== 'object' || raw === null) continue;
+    const f = raw as {
+      id?: unknown;
+      key?: unknown;
+      name?: unknown;
+      type?: unknown;
+      required?: unknown;
+      multiple?: unknown;
+    };
+    if (
+      typeof f.id !== 'string' ||
+      typeof f.key !== 'string' ||
+      typeof f.name !== 'string' ||
+      typeof f.type !== 'string'
+    ) {
+      continue;
+    }
+    out.push({
+      id: f.id,
+      key: f.key,
+      name: f.name,
+      type: f.type,
+      required: f.required === true,
+      multiple: f.multiple === true,
+    });
+  }
+  return out;
 }
 
 /**

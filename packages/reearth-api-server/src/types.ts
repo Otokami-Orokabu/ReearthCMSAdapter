@@ -225,11 +225,53 @@ export interface CmsModel {
   description?: string;
 }
 
+/**
+ * Schema of a single field on a CMS model. Returned as part of
+ * {@link CmsModelDetail}.
+ *
+ * `type` is a loose string because Re:Earth CMS may introduce new field
+ * types beyond our {@link CmsFieldType} enum (e.g. `"checkbox"`,
+ * `"geometryEditor"` exist on the wire). Consumers that only care about
+ * the `CmsFieldType` enum can cross-check.
+ */
+export interface CmsFieldSchema {
+  /** Field UUID. */
+  id: string;
+  /** Stable key used when addressing this field in payloads. */
+  key: string;
+  /** Display name shown in the CMS UI. */
+  name: string;
+  /** Field type as a string (often matches {@link CmsFieldType}). */
+  type: string;
+  /** Whether the CMS requires this field on create/update. */
+  required: boolean;
+  /** Whether the field accepts multiple values (array). */
+  multiple: boolean;
+}
+
+/**
+ * A model with its full schema (field definitions). Used by callers that
+ * need to understand what fields exist before constructing payloads — e.g.
+ * AI agents via the MCP `get_model` tool.
+ */
+export interface CmsModelDetail extends CmsModel {
+  /** Key of the field used as the "title" of items (optional). */
+  titleField?: string;
+  /** All fields defined on the model schema. */
+  fields: CmsFieldSchema[];
+}
+
 export interface ReearthClient {
   /**
    * List all models in the configured project via the Integration API.
    */
   listModels(): Promise<CmsModel[]>;
+
+  /**
+   * Get a single model with its schema (field definitions) via the
+   * Integration API. Returns `null` if the model is not found.
+   */
+  getModel(modelIdOrKey: string): Promise<CmsModelDetail | null>;
 
   /**
    * List items for a model using the Public API.

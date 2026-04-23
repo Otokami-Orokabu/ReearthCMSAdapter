@@ -41,6 +41,22 @@ export async function startMcpServer(): Promise<void> {
     },
   );
 
+  server.registerTool(
+    'get_model',
+    {
+      description:
+        'Get a single model with its full field schema (key, name, type, required, multiple). Useful before constructing create/update payloads.',
+      inputSchema: {
+        model: z.string().describe('Model id (UUID) or key'),
+      },
+    },
+    async ({ model }) => {
+      const detail = await client.getModel(model);
+      const body = detail === null ? 'null' : JSON.stringify(detail, null, 2);
+      return { content: [{ type: 'text', text: body }] };
+    },
+  );
+
   const bboxSchema = z
     .tuple([z.number(), z.number(), z.number(), z.number()])
     .describe('[minLng, minLat, maxLng, maxLat] (WGS-84 degrees)');

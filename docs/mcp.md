@@ -39,6 +39,7 @@ Cursor や他の MCP 対応 IDE も類似の設定で OK。stdio トランスポ
 | Tool | 入力 | 説明 | API |
 |---|---|---|---|
 | `list_models` | — | プロジェクト内の全モデル | Integration |
+| `get_model` | `model` | **単一モデルをスキーマ付きで取得** (fields: key/name/type/required/multiple) | Integration |
 | `list_items` | `model`, `limit?`, `offset?`, `bbox?`, `sort?` | モデルの published items 一覧。**bbox / sort の絞り込みに対応** | Public |
 | `list_features` | `model`, `limit?`, `offset?`, `bbox?`, `sort?` | **GeoJSON FeatureCollection** で取得 (`.geojson` variant) | Public |
 | `get_item` | `model`, `id` | 単体 item 取得 | Public |
@@ -91,6 +92,7 @@ EOF
 - 「`title` に "old" 含む item を全部 delete」→ `list_items` → AI がフィルタ → 各 `delete_item`
 - 「大阪周辺 (135.4,34.5,135.6,34.8 あたり) の投稿を GeoJSON で」→ `list_features(bbox=[...])`
 - 「新しい順に 20 件」→ `list_items(sort={field:'createdAt',order:'desc'}, limit=20)`
+- 「まずこのモデルのフィールドを教えて」→ `get_model(model)` → 把握後に `create_item` 呼び出し
 
 ## 関連
 
