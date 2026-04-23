@@ -2,7 +2,7 @@
 
 `apps/cli` が提供する `reearth-cms` コマンドの全サブコマンド仕様。
 
-- CLI / MCP / HTTP の **3 モードをまとめた 1 つのバイナリ** の CLI モード
+- **Adapter Hub** (CLI / HTTP / MCP) の CLI 入口。人間がターミナルから直接叩くときに使う
 - 実体: `apps/cli/dist/index.js` (ビルド後) / `apps/cli/src/index.ts` (dev)
 - 環境変数: 起動時に `./.env` / `../../.env` 等を自動探索 (詳細は [setup.md](./setup.md) は未作成、[../README.md](../README.md) 参照)
 
@@ -20,15 +20,17 @@ npm -w @hw/cli run dev -- <subcommand> ...
 
 ## データ操作
 
-### `reearth-cms list <model> [--limit N] [--offset N] [--bbox ...] [--sort ...] [--json]`
+### `reearth-cms list <model> [--all] [--limit N] [--offset N] [--bbox ...] [--sort ...] [--json]`
 
-指定モデルの **published items** を一覧 (Public API 経由)。フィルタ / ソート / ページングは Core で **fetch 後にクライアント側で適用** される (Public API がサーバサイドのフィルタを提供しないため)。
+指定モデルの items を一覧。**既定は Public API 経由で published のみ**。`--all` で Integration API 経由に切り替わり **draft も含む全 item** を返す。フィルタ / ソート / ページングは Core で **fetch 後にクライアント側で適用** される (API 側がサーバサイドのフィルタを提供しないため)。
 
 | オプション | 説明 |
 |---|---|
+| `--all` | Integration API 経由で draft + published を返す (未指定時は published のみ) |
 | `--limit <n>` | 最大返却件数 |
 | `--offset <n>` | 先頭から N 件スキップ (filter/sort 適用後) |
 | `--bbox <lng1,lat1,lng2,lat2>` | 地理的バウンディングボックス内の items のみ (`item.location` が Point 前提) |
+| `--near <lng,lat,radius_m>` | 中心から `radius_m` メートル以内 (Haversine) |
 | `--sort <field[:asc\|desc]>` | `item[field]` で並べ替え (数値/日付文字列も賢く比較) |
 | `--json` | 生 JSON で出力 (default は `id\ttitle`) |
 
@@ -36,10 +38,15 @@ npm -w @hw/cli run dev -- <subcommand> ...
 ```bash
 reearth-cms list hazzrd_reports
 reearth-cms list hazzrd_reports --limit 5
-reearth-cms list hazzrd_reports --bbox 139.5,35.5,140.0,35.9        # 東京周辺
+reearth-cms list hazzrd_reports --bbox 139.5,35.5,140.0,35.9        # 東京 bbox
+reearth-cms list hazzrd_reports --near 139.7671,35.6812,50000       # 東京 50km 圏内
 reearth-cms list hazzrd_reports --sort title:desc
 reearth-cms list hazzrd_reports --sort createdAt --limit 10 --json
+reearth-cms list hazzrd_reports --all                                # draft 確認 (seed 直後など)
+reearth-cms list hazzrd_reports --all --json | jq '.[].id'           # draft id 一覧
 ```
+
+フィルタ適用順: `near` → `bbox` → `sort` → `offset` → `limit` (Core で client-side 適用)。`--all` は fetch 層 (Public/Integration) を切り替えるだけで、フィルタの挙動は同じ。
 
 ### `reearth-cms get <model> <id>`
 
@@ -104,7 +111,7 @@ draft 状態の item を公開し、Public API (`list_items`) に出せるよう
 reearth-cms publish hazzrd_reports 01kpt3834ehjg9gv1bkcc1qg11
 ```
 
-### `reearth-cms features <model> [--bbox ...] [--sort ...] [--limit N] [--offset N]`
+### `reearth-cms features <model> [--bbox ...] [--near ...] [--sort ...] [--limit N] [--offset N]`
 
 items を **GeoJSON FeatureCollection** として取得 (Public API の `.geojson` variant を利用)。CMS 側で location を持たない item は自動除外される。出力は FeatureCollection JSON (stdout)。
 
@@ -113,8 +120,24 @@ items を **GeoJSON FeatureCollection** として取得 (Public API の `.geojso
 ```bash
 reearth-cms features hazzrd_reports > features.geojson
 reearth-cms features hazzrd_reports --bbox 135,34,140,37 --limit 20
+reearth-cms features hazzrd_reports --near 135.5,34.7,20000       # 大阪20km圏
 reearth-cms features hazzrd_reports --sort createdAt:desc | jq '.features | length'
 ```
+
+### `reearth-cms bbox <model> [--json]`
+
+モデル内の全 Point-located item を覆う bbox を自動計算 (Public API、`.geojson` variant + minmax)。
+
+```bash
+reearth-cms bbox hazzrd_reports
+# 131.36115117...,34.27396975...,139.83361987...,41.43219891...
+
+reearth-cms bbox hazzrd_reports --json
+# [131.36115117..., 34.27396975..., 139.83361987..., 41.43219891...]
+```
+
+地図を初期表示する時の `fitBounds` や、他サブコマンドの `--bbox` にそのままパイプできる形。
+Point が 1 件も無ければ stderr にメッセージ + exit 1。
 
 MapLibre / Leaflet にそのまま渡せる:
 ```js
@@ -126,6 +149,8 @@ map.addSource('reports', { type: 'geojson', data: fc });
 
 単一モデルを **スキーマ付き** で取得 (Integration API)。`reearth-cms models` は一覧、こちらは詳細。
 
+内部で軽量版 `/models/{id}` と JSON Schema 版 `/models/{id}/schema.json` の 2 本をマージしているので、`description` / `options` (select・tag の選択肢) / `geoSupportedTypes` も同時に見える (`docs/quirks.md` §7 参照)。
+
 ```bash
 reearth-cms model hazzrd_reports
 # hazzrd_reports (hazzrd_reports)
@@ -133,14 +158,35 @@ reearth-cms model hazzrd_reports
 #   fields (7):
 #     title	text	タイトル
 #     category	select	カテゴリ
+#       description: 危険の種類
+#       options: road, facility, disaster, other
 #     location	geometryObject	位置
+#       geoSupportedTypes: POINT
 #     photos	asset [multiple]	写真
 #     ...
 
-reearth-cms model hazzrd_reports --json > schema.json
+reearth-cms model hazzrd_reports --json > model.json
 ```
 
 AI (MCP) や CLI ユーザーが `create_item` 前にフィールド構成を把握するのに使う。
+
+### `reearth-cms schema <id-or-key>`
+
+`/models/{id}/schema.json` の **raw JSON Schema (2020-12 + `x-` 拡張)** をそのまま stdout に流す。フォーム自動生成や、`CmsFieldSchema` にまだ取り込まれていない `x-*` キーを調べたい時に。
+
+```bash
+reearth-cms schema hazzrd_reports | jq '.properties.category'
+# {
+#   "type": "string",
+#   "title": "category",
+#   "description": "危険の種類",
+#   "x-fieldType": "select",
+#   "x-multiple": false,
+#   "x-options": ["road", "facility", "disaster", "other"]
+# }
+```
+
+通常は `reearth-cms model` でマージ済みの構造を見れば十分。raw が必要な時だけこちら。
 
 ### `reearth-cms models [--json]`
 
@@ -151,6 +197,56 @@ reearth-cms models
 # 01kpq9bhyhjzsdszb13nz6yq7q	hazzrd_reports	hazzrd_reports
 # 01kpsehqqp5773xwznd1k9c3f6	move_lob	move_lob
 ```
+
+---
+
+## アセット (画像等ファイル)
+
+### `reearth-cms upload (--url <url> | --file <path>) [--name <name>] [--content-type <mime>] [--json]`
+
+Asset (画像等のファイル) を CMS に作成 (Integration API)。2 つの方法:
+
+| 形式 | フラグ | 動作 |
+|---|---|---|
+| URL 指定 | `--url <public-url>` | CMS が URL を fetch してコピー保持 |
+| ローカルファイル | `--file <path>` | CLI がファイル読み込み → multipart アップロード |
+
+オプション:
+- `--name`: 保存名を上書き (default: URL 末尾 / ファイル basename)
+- `--content-type`: MIME 型を上書き (default: 拡張子から推測 / CMS 判定)
+- `--json`: 全 `CmsAsset` オブジェクトで出力 (default: `id\turl`)
+
+```bash
+# URL 指定
+reearth-cms upload --url https://example.com/photo.png
+
+# ローカルファイル直接
+reearth-cms upload --file ./hero.jpg --content-type image/jpeg
+reearth-cms upload --file ./data.csv --name daily_stats.csv
+```
+
+返却された `id` を item 作成時に `asset` 型 field に:
+```bash
+ASSET_ID=$(reearth-cms upload --file ./photo.png | cut -f1)
+reearth-cms create hazzrd_reports --data "{
+  \"title\":  { \"type\": \"text\",  \"value\": \"写真付き投稿\" },
+  \"photos\": { \"type\": \"asset\", \"value\": [\"$ASSET_ID\"] }
+}"
+```
+
+### `reearth-cms asset <id> [--json]`
+
+単体アセット取得 (Integration API)。`upload` 後の id を再読み込みしたい時、item の asset field に入っている id を解決したい時に。
+
+```bash
+reearth-cms asset 01kpq9c...
+# 01kpq9c...	https://assets.cms.reearth.io/...
+
+reearth-cms asset 01kpq9c... --json
+# { "id": "...", "url": "...", "contentType": "image/png", "totalSize": 12345, ... }
+```
+
+不明な id は stderr にメッセージ + exit 1。
 
 ---
 

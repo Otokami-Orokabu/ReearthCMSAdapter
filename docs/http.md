@@ -1,6 +1,8 @@
 # HTTP モード (`reearth-cms serve`)
 
-`reearth-cms serve` は Express ベースの HTTP サーバを起動し、Re:Earth CMS の Read/Write 操作を REST として露出します。web フロント (`apps/web`) や Unity / モバイルアプリ / 他のバックエンドなどが叩けます。
+**Adapter Hub** (CLI / HTTP / MCP) の HTTP 入口。機械 (web フロント `apps/web` / Unity / モバイル / 他のバックエンド) が REST 経由で CMS を叩くときに使います。
+
+`reearth-cms serve` は Express ベースの HTTP サーバを起動し、Re:Earth CMS の Read/Write 操作を REST として露出します。内部は CLI / MCP と同じ Core (`@hw/reearth-api-server`) を共有しており、エラー形・認証モデル・ACL 挙動はすべて共通です。
 
 ## 起動
 
@@ -17,11 +19,17 @@ reearth-cms serve --port 8080
 |---|---|---|---|
 | `GET` | `/api/health` | ヘルスチェック | — |
 | `GET` | `/api/items/:model` | モデルの published items 一覧 (query filter 可) | Public API |
+| `GET` | `/api/items/:model/all` | **draft + published 全 item** 一覧 (query filter 可) | Integration API |
 | `GET` | `/api/items/:model/:id` | 単体 item 取得 | Public API |
 | `POST` | `/api/items/:model` | item 作成 (draft) | Integration API |
 | `GET` | `/api/features/:model` | **GeoJSON FeatureCollection** (`.geojson` variant) | Public API |
 | `GET` | `/api/models` | プロジェクト内の全モデル一覧 | Integration API |
-| `GET` | `/api/models/:idOrKey` | モデル詳細 (fields スキーマ込み) | Integration API |
+| `GET` | `/api/models/:idOrKey` | モデル詳細 (fields スキーマ込み、`schema.json` とマージ済み) | Integration API |
+| `GET` | `/api/models/:idOrKey/schema.json` | **raw JSON Schema (2020-12 + `x-` 拡張)** | Integration API |
+| `GET` | `/api/assets/:id` | 単体 asset 取得 | Integration API |
+| `POST` | `/api/assets` | URL から asset 作成 (body: `{url}`) | Integration API |
+| `POST` | `/api/assets/file` | multipart で直接アップロード (field: `file`) | Integration API |
+| `GET` | `/api/features/:model/bbox` | モデルの全 Point を覆う bbox | Public API |
 
 現時点で `update` / `delete` / `publish` は **HTTP に露出していません** (CLI・MCP からのみ利用可能)。必要性が生じたら追加します。
 
@@ -32,9 +40,10 @@ reearth-cms serve --port 8080
 | `limit` | 正の整数 | 最大返却件数 |
 | `offset` | 非負整数 | filter/sort 後に先頭 N 件スキップ |
 | `bbox` | `lng1,lat1,lng2,lat2` | 地理的バウンディングボックスで絞り込み |
+| `near` | `lng,lat,radius_m` | 中心から半径 (m) 以内 (Haversine) |
 | `sort` | `field` または `field:asc\|desc` | 並び替え |
 
-不正なパラメータは **400 Bad Request** に明確なメッセージで落ちる。
+不正なパラメータは **400 Bad Request** に明確なメッセージで落ちる。適用順は `near` → `bbox` → `sort` → `offset` → `limit`。
 
 ## リクエスト / レスポンス
 
@@ -63,6 +72,22 @@ $ curl "http://localhost:3000/api/items/hazzrd_reports?bbox=135,34,140,37&sort=t
 
 Items は **flat 構造** (Public API が既に flat で返す)。`location` は GeoJSON Point、`photos` は Asset 配列 (`id` + `url`)。
 
+### `GET /api/items/:model/all`
+
+`/api/items/:model` と同じレスポンス構造だが、**Integration API 経由で draft + published 全 item** を返す。`?bbox=` / `?near=` / `?sort=` / `?limit=` / `?offset=` は Public 版と同じ。
+
+```bash
+# 現在プロジェクト内の hazzrd_reports 全 item (draft 含む)
+$ curl http://localhost:3000/api/items/hazzrd_reports/all
+
+# seed 直後に draft が何件作られたか確認
+$ curl -s http://localhost:3000/api/items/hazzrd_reports/all | jq '.items | length'
+
+# draft のうち title に "seed-" を含むものだけ id 抽出 (掃除用)
+$ curl -s http://localhost:3000/api/items/hazzrd_reports/all \
+    | jq -r '.items[] | select(.title | startswith("seed-")) | .id'
+```
+
 ### `GET /api/features/:model`
 
 GeoJSON FeatureCollection として取得。`.geojson` variant 経由のため **location なし item は CMS 側で除外**される。
@@ -90,7 +115,7 @@ $ curl http://localhost:3000/api/features/hazzrd_reports
 $ curl "http://localhost:3000/api/features/hazzrd_reports?bbox=135.3,34.5,135.8,34.9&sort=title:desc&limit=30"
 ```
 
-### `GET /api/models` / `GET /api/models/:idOrKey`
+### `GET /api/models` / `GET /api/models/:idOrKey` / `GET /api/models/:idOrKey/schema.json`
 
 ```bash
 $ curl http://localhost:3000/api/models
@@ -103,13 +128,79 @@ $ curl http://localhost:3000/api/models/hazzrd_reports
   "name": "hazzrd_reports",
   "fields": [
     { "id": "...", "key": "title", "name": "タイトル", "type": "text", "required": false, "multiple": false },
-    { "id": "...", "key": "location", "name": "位置", "type": "geometryObject", ... },
+    { "id": "...", "key": "category", "name": "カテゴリ", "type": "select", "required": false, "multiple": false,
+      "description": "危険の種類", "options": ["road","facility","disaster","other"] },
+    { "id": "...", "key": "location", "name": "位置", "type": "geometryObject", "required": false, "multiple": false,
+      "geoSupportedTypes": ["POINT"] },
     ...
   ]
 }
+
+# raw JSON Schema (2020-12) — form 自動生成などに
+$ curl http://localhost:3000/api/models/hazzrd_reports/schema.json | jq '.properties.category'
+{
+  "type": "string",
+  "description": "危険の種類",
+  "x-fieldType": "select",
+  "x-options": ["road","facility","disaster","other"]
+}
 ```
 
-不明な model は 404 (`{"error":"Not Found"}`)。
+不明な model は 404 (`{"error":"Not Found"}`)。`GET /api/models/:idOrKey` は軽量 `/models/{id}` と `/models/{id}/schema.json` をマージしているため、通常用途ではこちらで十分。raw が欲しい時だけ `/schema.json` バリアントを使う (`docs/quirks.md` §7 参照)。
+
+### `GET /api/assets/:id`
+
+単体 asset 取得 (Integration API)。`upload` で得た id を後から url / contentType などに解決する時に。
+
+```bash
+$ curl http://localhost:3000/api/assets/01kpq9c...
+{
+  "id": "01kpq9c...",
+  "url": "https://assets.cms.reearth.io/...",
+  "contentType": "image/png",
+  "totalSize": 12345,
+  "public": true,
+  "createdAt": "...",
+  "updatedAt": "..."
+}
+```
+
+不明な id は `404 {"error":"Not Found"}`。
+
+### `POST /api/assets` (URL アップロード)
+
+```bash
+$ curl -X POST -H "Content-Type: application/json" \
+    -d '{"url":"https://example.com/photo.png"}' \
+    http://localhost:3000/api/assets
+{ "id": "01kpw940...", "url": "https://assets.cms.reearth.io/...", "contentType": "image/png", ... }
+```
+
+不正 body: 400 `{"error":"Body must include a non-empty \"url\" string."}`
+
+### `POST /api/assets/file` (multipart 直接アップロード)
+
+```bash
+$ curl -X POST -F "file=@./photo.png" http://localhost:3000/api/assets/file
+{ "id": "01kpx...", "url": "https://assets.cms.reearth.io/...", "contentType": "image/png", ... }
+```
+
+- multipart field 名は `file` で固定
+- 最大サイズ 32 MB (超えると 413 相当のエラー)
+- `Content-Type` は multer がファイル情報から自動判定 → SDK 側で CMS へ送信
+
+どちらの route でも、返却 `id` を item の `asset` 型 field の `value` 配列に入れる。
+
+### `GET /api/features/:model/bbox`
+
+モデル内の全 Point-located item を覆う bbox を返す (Public API で取得したデータから計算):
+
+```bash
+$ curl http://localhost:3000/api/features/hazzrd_reports/bbox
+{ "bbox": [131.36, 34.27, 139.83, 41.43] }
+```
+
+Point が 1 件も無い場合は 404 `{"error":"No Point-located items."}`。
 
 **MapLibre で直接使う例:**
 ```js

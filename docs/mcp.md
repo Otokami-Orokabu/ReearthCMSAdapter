@@ -4,7 +4,7 @@
 
 ## 動機
 
-本プロジェクトは **Ports & Adapters** で Core (`@hw/reearth-api-server`) を複数プロトコルに露出する設計。MCP は CLI / HTTP と並ぶ **Secondary Adapter の 3 本目**で、AI クライアント向けの入り口として機能します。
+本プロジェクトは **Re:Earth CMS Adapter Hub** — 同じ Core (`@hw/reearth-api-server`) を複数の Primary Adapter から呼べる構造。MCP は CLI / HTTP と並ぶ **Primary Adapter の 3 本目**で、AI エージェント向けの入口として機能します。
 
 同じ Core を使うため、MCP tool と CLI subcommand は**一対一で対応**します (命名も揃えてある)。
 
@@ -39,24 +39,27 @@ Cursor や他の MCP 対応 IDE も類似の設定で OK。stdio トランスポ
 | Tool | 入力 | 説明 | API |
 |---|---|---|---|
 | `list_models` | — | プロジェクト内の全モデル | Integration |
-| `get_model` | `model` | **単一モデルをスキーマ付きで取得** (fields: key/name/type/required/multiple) | Integration |
-| `list_items` | `model`, `limit?`, `offset?`, `bbox?`, `sort?` | モデルの published items 一覧。**bbox / sort の絞り込みに対応** | Public |
-| `list_features` | `model`, `limit?`, `offset?`, `bbox?`, `sort?` | **GeoJSON FeatureCollection** で取得 (`.geojson` variant) | Public |
+| `get_model` | `model` | **単一モデルをスキーマ付きで取得**。軽量 `/models/{id}` と `schema.json` をマージしているので、`description` / `options` (select/tag 選択肢) / `geoSupportedTypes` まで同時に返る | Integration |
+| `get_json_schema` | `model` | **raw JSON Schema (2020-12 + `x-` 拡張)** をそのまま返す。`get_model` では表現されない `x-*` キーを見たい時用 | Integration |
+| `list_items` | `model`, `limit?`, `offset?`, `bbox?`, `near?`, `sort?` | モデルの published items 一覧。**bbox / near / sort の絞り込みに対応** | Public |
+| `list_all_items` | `model`, `limit?`, `offset?`, `bbox?`, `near?`, `sort?` | **draft + published 両方**を返す。seed / create 直後の確認、draft 掃除に | Integration |
+| `list_features` | `model`, `limit?`, `offset?`, `bbox?`, `near?`, `sort?` | **GeoJSON FeatureCollection** で取得 (`.geojson` variant) | Public |
+| `get_bbox` | `model` | **モデル全 Point item を覆う bbox** `[lng1,lat1,lng2,lat2]`、空なら `null` | Public |
 | `get_item` | `model`, `id` | 単体 item 取得 | Public |
 | `create_item` | `model`, `payload` | item 作成 (draft) | Integration |
 | `update_item` | `id`, `payload` | 部分更新 | Integration |
 | `delete_item` | `id` | item 削除 | Integration |
 | `publish_item` | `model`, `id` | draft を公開 | Integration |
+| `get_asset` | `id` | 単体 asset 取得 (url / contentType など) | Integration |
+| `upload_asset_by_url` | `url` | **公開 URL から asset 作成** — 返り id を item の asset 型 field に入れる | Integration |
 
 ### フィルタ・ソート引数の形
 
 - `bbox`: `[minLng, minLat, maxLng, maxLat]` の長さ4の数値タプル (WGS-84 度)
+- `near`: `{ lng: number, lat: number, radius: number }` — 中心から半径 (m) 以内 (Haversine)
 - `sort`: `{ field: string, order?: 'asc' | 'desc' }`
 
 `list_items` は `item[field]` で、`list_features` は `feature.properties[field]` (または `field: 'id'` で Feature ID) でソートします。
-
-`CmsPayload` の形は `Record<string, { type: CmsFieldType, value: unknown }>`。`type` は
-`text` / `textArea` / `markdown` / `richText` / `integer` / `number` / `bool` / `date` / `url` / `select` / `tag` / `asset` / `reference` / `geometryObject` のいずれか。
 
 `CmsPayload` の形は `Record<string, { type: CmsFieldType, value: unknown }>`。`type` は
 `text` / `textArea` / `markdown` / `richText` / `integer` / `number` / `bool` / `date` / `url` / `select` / `tag` / `asset` / `reference` / `geometryObject` のいずれか。
@@ -82,7 +85,7 @@ EOF
 
 期待されるレスポンス:
 1. `initialize` への応答 (protocolVersion / capabilities / serverInfo)
-2. `tools/list` への応答 (7 tool の JSON Schema)
+2. `tools/list` への応答 (14 tool の JSON Schema)
 3. `tools/call list_models` の結果 (モデル一覧)
 
 ## ユースケース例
@@ -93,6 +96,10 @@ EOF
 - 「大阪周辺 (135.4,34.5,135.6,34.8 あたり) の投稿を GeoJSON で」→ `list_features(bbox=[...])`
 - 「新しい順に 20 件」→ `list_items(sort={field:'createdAt',order:'desc'}, limit=20)`
 - 「まずこのモデルのフィールドを教えて」→ `get_model(model)` → 把握後に `create_item` 呼び出し
+- 「渋谷駅から 2km 以内の投稿を見せて」→ `list_features(near={lng:139.7016,lat:35.6580,radius:2000})`
+- 「全部入る地図の範囲ちょうだい」→ `get_bbox(model)` → 結果を `fitBounds` に
+- 「さっき create した item は?」→ `list_all_items(model)` (draft 含む)
+- 「この asset id 何だっけ」→ `get_asset(id)` → url / contentType 確認
 
 ## 関連
 

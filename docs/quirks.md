@@ -99,15 +99,47 @@ URL の末尾に `.geojson` を付けると、FeatureCollection 形式で返る:
 
 本プロジェクトの `listFeatures` Core 関数 / `reearth-cms features` CLI / MCP `list_features` tool / HTTP `/api/features/:model` ルートはこの variant を内部で叩いている。MapLibre / Leaflet / Mapbox に直接データソースとして渡せる形。
 
-## 7. `select` / `tag` フィールドの選択肢は schema API からは取れない
+## 7. Integration API の 2 種類の schema 形式 — 情報量が大きく違う
 
-`getModel` で取得できる field schema は `{id, key, name, type, required, multiple}` のみで、**`select` / `tag` の選択肢 (options) は含まれない**。
+同じモデルについて、**2 つのエンドポイント**で形式が異なる schema が返る:
 
-→ 有効値を知るには:
-- CMS 管理 UI から確認
-- 既存 item の値分布を `listItems` で取得して参考にする (例: `hazzrd_reports.category` は `disaster` / `other` しか観測されていない)
+### 軽量版: `GET /api/{ws}/projects/{p}/models/{model}`
 
-これが原因で `seed --category "obstruction,..."` が 400 で弾かれる事例が発生する (本プロジェクトでも実測済)。
+SDK の `getModel()` が叩く方。`schema.fields[]` に以下のみ:
+```
+{ id, key, name, type, required, multiple }
+```
+
+select / tag の選択肢、geometry の許容型、field 説明 などは**含まれない**。
+
+### リッチ版: `GET /api/{ws}/projects/{p}/models/{model}/schema.json` ← 推奨
+
+**JSON Schema 2020-12** 形式 + `x-` 拡張。実測した追加情報:
+
+| 追加情報 | JSON Schema キー | 例 |
+|---|---|---|
+| field 説明 | `description` | `"危険の種類"` |
+| select / tag 選択肢 | `x-options` | `["road", "facility", "disaster", "other"]` |
+| geometry 許容型 | `x-geoSupportedTypes` / `x-geoSupportedType` | `["POINT"]` / `"LINESTRING"` |
+| multiple フラグ | `x-multiple` | `true` / `false` |
+| CMS 型名 | `x-fieldType` | `"select"` / `"geometryObject"` 等 |
+
+例: `hazzrd_reports.category` の selects は `["road", "facility", "disaster", "other"]`。軽量版では決して得られないが、`schema.json` variant なら取れる。
+
+**本プロジェクトは `getModel` を**この両方をマージして返す実装**にしている**ので、Core 利用側 (CLI/MCP/HTTP) は追加の field を通常通り参照するだけで良い (`CmsFieldSchema.options` / `.description` / `.geoSupportedTypes`)。
+
+### 未検証の field 型
+
+手元の CMS モデルに以下が存在しないため未確認:
+- `reference` → おそらく `$ref` か `x-modelId` 的な形で参照先が入る
+- `group` → JSON Schema 標準の `type: "object"` + ネスト `properties` になる想定
+- `tag` → `type: "array"` + `x-options` になる想定
+
+該当 field が出た時点で `getJsonSchema` raw で確認し、必要なら Core の型に反映する。
+
+### metadata_schema.json は要注意
+
+`/metadata_schema.json` は metadata schema が定義されていないモデルでは **500 internal server error** を返す (本プロジェクトの hazzrd_reports で実測)。呼び出しは try/catch で落ちる前提。
 
 ## 8. `CmsFieldType` enum に入っていない CMS の field 型がある
 
@@ -137,3 +169,61 @@ NG:  /api/workspaces/{ws}/projects/{p}/models/{m}/items/{id}  ← 404
 ```
 
 SDK は前者を使う。kobe-map-server も前者。
+
+## 10. Public API `listItems` のページング方針
+
+Public API は `{ results, totalCount, page, perPage }` のエンベロープを返す。本 ACL (`packages/reearth-api-server/src/public.ts::listItemsPublic`) は:
+
+- `per_page=100` で `page=1` から順次取得
+- `results.length < 100` もしくは `totalCount` に達した時点で終了
+- 安全弁として最大 100 ページ (= 10,000 items) でハード打ち切り
+
+全ページ fetch 後に `applyListOps` で bbox/near/sort/offset/limit を**すべてクライアント側で適用**する。理由:
+- bbox/near は Public API にクエリとして乗せる手段がない
+- sort はサーバ側挙動が不安定
+- `offset` を含む slice は filter/sort 後でなければ正しい順序にならない
+
+**将来の最適化 TODO**: CMS 側が bbox/near/sort を受け入れるクエリを提供したら、その分のクライアント側処理を skip して「必要なページだけ取る」方向に寄せられる。
+
+## 11. Public API `.geojson` variant のページング挙動
+
+`listFeaturesPublic` (`{model}.geojson`) も同様にページング対応済み。ただし flat JSON との違いに注意:
+
+| 項目 | flat JSON | `.geojson` variant |
+|---|---|---|
+| レスポンス envelope | `{ results, totalCount, ... }` | `{ type: 'FeatureCollection', features }` |
+| `totalCount` | あり | **なし** |
+| 短ページ (`length < per_page`) | ほぼ起きない | **起きる**（Point を持たない item がサーバ側で除外されるため） |
+| 空ページ (`length === 0`) | 末尾 | 末尾 |
+
+このため `listFeaturesPublic` の終端判定は **「空ページを受信したら break」** としている（短ページ break は不可 — 途中の page で Point 不足による 2 件返りが発生するので、切り上げると取りこぼす）。
+
+実測例 (`hazzrd_reports` で items=9, Point を持つもの=7):
+- `per_page=3&page=1` → 2 features (3 items のうち 2 件が Point)
+- `per_page=3&page=2` → 3 features
+- `per_page=3&page=3` → 2 features
+- `per_page=3&page=4` → 0 features （終端）
+
+MAX_PAGES × PAGE_SIZE = 10,000 を超えた場合は `ReearthApiError` を throw（`listItemsPublic` と対称）。
+
+## 12. `asset.public` と `asset.url` のセマンティクス
+
+`CmsAsset` は `public: boolean` と `url: string` を含む。実機観察 (`assets.cms.reearth.io`):
+
+| `public` | `url` の挙動 |
+|---|---|
+| `true` | **匿名アクセス可**。`access-control-allow-origin: *` + `cache-control: public, max-age=3600` が付く。そのままブラウザの `<img src>` / `<a href>` で使える。CDN 配信 (CMS 本体ドメインとは別) |
+| `false` | 未検証 (本プロジェクトの全 asset が public のため)。CMS 仕様上は非公開を意味するので、**ブラウザから直接参照できる保証はない**。web クライアントで使う前に `asset.public === true` を確認するのが安全 |
+
+ブラウザクライアントから asset を参照するときの推奨フロー:
+
+```ts
+const asset = await fetch('/api/assets/<id>').then(r => r.json());
+if (!asset.public) {
+  // fallback: show placeholder, or proxy through the backend
+  return;
+}
+imgEl.src = asset.url;
+```
+
+サーバ側 (HTTP adapter / Core) は `public` の値を加工せず透過的に返す。public-visibility の判断は**呼び出し側の責務**。
