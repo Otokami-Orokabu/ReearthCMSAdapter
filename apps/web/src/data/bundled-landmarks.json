@@ -1,0 +1,1080 @@
+[
+  {
+    "id": "01kpx5cpc33n8422269rm7j8w7",
+    "createdAt": "2026-04-23T12:35:14.435Z",
+    "updatedAt": "2026-04-23T12:35:14.435Z",
+    "title": "清水寺",
+    "description": "京都東山に建つ古刹。舞台造りの本堂からの眺望と、音羽の滝で知られる世界遺産。",
+    "category": "寺社",
+    "prefecture": "京都府",
+    "location": "{\"coordinates\":[135.785,34.9949],\"type\":\"Point\"}",
+    "story": "# 清水寺\n\n778年、賢心により開創。本堂は徳川家光が再建した国宝で、音羽山の斜面に139本の柱で張り出した「清水の舞台」で知られる。\n\n## 見どころ\n\n- **清水の舞台**: 13 m の崖から張り出した舞台造\n- **音羽の滝**: 三筋の水で延命・学業・恋愛成就\n- **紅葉ライトアップ** (11 月下旬)"
+  },
+  {
+    "id": "01kpx5cqd6p6j8r2ajysmtbyzp",
+    "createdAt": "2026-04-23T12:35:15.494Z",
+    "updatedAt": "2026-04-23T12:35:15.494Z",
+    "title": "金閣寺",
+    "description": "3 層の楼閣の上 2 層に金箔を施した禅寺。北山文化を代表する建築で、鏡湖池に映る姿は息を飲む美しさ。",
+    "category": "寺社",
+    "prefecture": "京都府",
+    "location": "{\"coordinates\":[135.7292,35.0394],\"type\":\"Point\"}",
+    "story": "# 金閣寺 (鹿苑寺)\n\n1397 年に足利義満が建てた北山殿を、義満の死後、臨済宗の禅寺としたもの。正式名称は鹿苑寺 (ろくおんじ)。\n\n## 見どころ\n\n- **金閣 (舎利殿)**: 3 層構造、上 2 層に金箔\n- **鏡湖池**: 金閣を逆さに映す\n- **雪景色の金閣** (冬限定)"
+  },
+  {
+    "id": "01kpx5cr67rgq8rchk8pygq1dp",
+    "createdAt": "2026-04-23T12:35:16.295Z",
+    "updatedAt": "2026-04-23T12:35:16.295Z",
+    "title": "姫路城",
+    "description": "白漆喰の城壁が白鷺のように美しい、日本最初の世界遺産。「白鷺城」の異名でも知られる現存天守。",
+    "category": "城郭",
+    "prefecture": "兵庫県",
+    "location": "{\"coordinates\":[134.6938,34.8394],\"type\":\"Point\"}",
+    "story": "# 姫路城\n\n1609 年に池田輝政が築城。五重六階の大天守と三つの小天守が連立する日本屈指の城郭。1993 年に法隆寺とともに日本初の世界遺産登録。\n\n## 見どころ\n\n- **大天守**: 国宝、白漆喰総塗籠の外壁\n- **桜のシーズン** (4 月初旬)\n- **西の丸庭園**"
+  },
+  {
+    "id": "01kpx5cs0e7q9ey02evzsjqxv6",
+    "createdAt": "2026-04-23T12:35:17.134Z",
+    "updatedAt": "2026-04-23T12:35:17.134Z",
+    "title": "兼六園",
+    "description": "日本三名園の一つ、加賀百万石前田家の大名庭園。四季折々の景色が楽しめる回遊式庭園。",
+    "category": "庭園",
+    "prefecture": "石川県",
+    "location": "{\"coordinates\":[136.6625,36.5625],\"type\":\"Point\"}",
+    "story": "# 兼六園\n\n江戸期に加賀藩が整備した大名庭園で、水戸偕楽園・岡山後楽園と並ぶ日本三名園。六つの景観の長所を兼ね備えるとして「兼六」と名付けられた。\n\n## 見どころ\n\n- **徽軫 (ことじ) 灯籠**: 兼六園のシンボル\n- **唐崎松**: 冬の「雪吊り」\n- **霞ヶ池**"
+  },
+  {
+    "id": "01kpx5ct0mz353qtjb9sr255wd",
+    "createdAt": "2026-04-23T12:35:18.164Z",
+    "updatedAt": "2026-04-23T12:35:18.164Z",
+    "title": "厳島神社",
+    "description": "海に浮かぶ朱塗りの大鳥居と社殿で有名。海上に建てられた類例のない神社建築で、世界遺産。",
+    "category": "寺社",
+    "prefecture": "広島県",
+    "location": "{\"coordinates\":[132.3197,34.296],\"type\":\"Point\"}",
+    "story": "# 厳島神社\n\n推古天皇元年 (593 年) の創建と伝わる古社。平清盛により現在の社殿が造営された。満潮時には海上に浮かんで見える大鳥居と社殿は世界遺産。\n\n## 見どころ\n\n- **大鳥居**: 満潮時は海に浮かび、干潮時は歩いて近づける\n- **本殿・拝殿**: 国宝、寝殿造風\n- **回廊**: 約 270 m"
+  },
+  {
+    "id": "01kpx5cv13fxtf9tyvqej5apkh",
+    "createdAt": "2026-04-23T12:35:19.203Z",
+    "updatedAt": "2026-04-23T12:35:19.203Z",
+    "title": "東京駅丸の内駅舎",
+    "description": "赤レンガの近代建築。辰野金吾設計、1914 年開業。創建当時の姿に復原された国の重要文化財。",
+    "category": "近代建築",
+    "prefecture": "東京都",
+    "location": "{\"coordinates\":[139.7666,35.6812],\"type\":\"Point\"}",
+    "story": "# 東京駅丸の内駅舎\n\n1914 年に辰野金吾の設計で開業。戦災で 3 階部分とドームを焼失したが、2012 年に創建当時の姿に復原。国の重要文化財。\n\n## 見どころ\n\n- **南北のドーム天井装飾**\n- **夜のライトアップ**\n- **KITTE 屋上から全景**"
+  },
+  {
+    "id": "01kpx5cw0e0n6e96r4nh2es6zp",
+    "createdAt": "2026-04-23T12:35:20.206Z",
+    "updatedAt": "2026-04-23T12:35:20.206Z",
+    "title": "白川郷",
+    "description": "急勾配の茅葺き屋根「合掌造り」が並ぶ山間の集落。冬の雪景色は世界遺産を代表する景観。",
+    "category": "町並み",
+    "prefecture": "岐阜県",
+    "location": "{\"coordinates\":[136.9064,36.2585],\"type\":\"Point\"}",
+    "story": "# 白川郷 (荻町合掌造り集落)\n\n岐阜県北部の山間にある合掌造り集落。豪雪に耐えるため屋根を急勾配 (60°) の茅葺きとしたのが「合掌造り」。1995 年に世界遺産登録。\n\n## 見どころ\n\n- **合掌造りの家屋群** (100 棟以上)\n- **冬のライトアップ** (1-2 月の限られた日)\n- **展望台からの眺望**"
+  },
+  {
+    "id": "01kpx5cwtve90b87jwn7ra623n",
+    "createdAt": "2026-04-23T12:35:21.051Z",
+    "updatedAt": "2026-04-23T12:35:21.051Z",
+    "title": "富士山",
+    "description": "標高 3,776 m、日本最高峰の独立峰。信仰の対象と芸術の源泉として世界文化遺産に登録。",
+    "category": "自然",
+    "prefecture": "山梨県",
+    "location": "{\"coordinates\":[138.7313,35.3606],\"type\":\"Point\"}",
+    "story": "# 富士山\n\n静岡県と山梨県にまたがる日本最高峰 (3,776 m)。古来から信仰の山として崇められ、浮世絵や文学にも多く描かれてきた。2013 年に「信仰の対象と芸術の源泉」として世界文化遺産に登録。\n\n## 見どころ\n\n- **五合目** (富士スバルライン)\n- **富士五湖** (河口湖・山中湖など)\n- **新幹線から眺める富士**"
+  },
+  {
+    "id": "01kpx5pxdrz1007mb8wkqcx96m",
+    "createdAt": "2026-04-23T12:40:49.336Z",
+    "updatedAt": "2026-04-23T12:40:49.336Z",
+    "title": "根室半島チャシ跡群",
+    "description": "アイヌの砦「チャシ」24 カ所の遺跡群。日本100名城 No.1。",
+    "category": "城郭",
+    "prefecture": "北海道",
+    "location": "{\"coordinates\":[145.595,43.31],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pxjz3kzjyb2evk7ma46r",
+    "createdAt": "2026-04-23T12:40:49.503Z",
+    "updatedAt": "2026-04-23T12:40:49.503Z",
+    "title": "五稜郭",
+    "description": "星形の稜堡式城郭、幕末の箱館戦争の舞台。日本100名城 No.2。",
+    "category": "城郭",
+    "prefecture": "北海道",
+    "location": "{\"coordinates\":[140.757,41.798],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pxqrs0xqtdq3h8p85wfc",
+    "createdAt": "2026-04-23T12:40:49.656Z",
+    "updatedAt": "2026-04-23T12:40:49.656Z",
+    "title": "松前城",
+    "description": "北海道唯一の本格的日本式城郭。日本100名城 No.3。",
+    "category": "城郭",
+    "prefecture": "北海道",
+    "location": "{\"coordinates\":[140.107,41.432],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pxwp1j9803fnfgezdy40",
+    "createdAt": "2026-04-23T12:40:49.814Z",
+    "updatedAt": "2026-04-23T12:40:49.814Z",
+    "title": "弘前城",
+    "description": "現存天守を持つ東北屈指の名城、桜の名所。日本100名城 No.4。",
+    "category": "城郭",
+    "prefecture": "青森県",
+    "location": "{\"coordinates\":[140.465,40.608],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5py1vd6ftq31t7csqxhb6",
+    "createdAt": "2026-04-23T12:40:49.979Z",
+    "updatedAt": "2026-04-23T12:40:49.979Z",
+    "title": "根城",
+    "description": "南部氏の居城、広大な平山城の史跡。日本100名城 No.5。",
+    "category": "城郭",
+    "prefecture": "青森県",
+    "location": "{\"coordinates\":[141.499,40.512],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pyejtnk75574gagrwrgh",
+    "createdAt": "2026-04-23T12:40:50.386Z",
+    "updatedAt": "2026-04-23T12:40:50.386Z",
+    "title": "盛岡城",
+    "description": "花崗岩石垣が特徴の南部氏居城。日本100名城 No.6。",
+    "category": "城郭",
+    "prefecture": "岩手県",
+    "location": "{\"coordinates\":[141.152,39.703],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pyk512fa4q30h221ng4c",
+    "createdAt": "2026-04-23T12:40:50.533Z",
+    "updatedAt": "2026-04-23T12:40:50.533Z",
+    "title": "多賀城",
+    "description": "古代陸奥国府、東北経営の拠点。日本100名城 No.7。",
+    "category": "城郭",
+    "prefecture": "宮城県",
+    "location": "{\"coordinates\":[140.985,38.309],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pys1sbr56ge0qgvzjr65",
+    "createdAt": "2026-04-23T12:40:50.721Z",
+    "updatedAt": "2026-04-23T12:40:50.721Z",
+    "title": "仙台城",
+    "description": "伊達政宗の居城「青葉城」、山城。日本100名城 No.8。",
+    "category": "城郭",
+    "prefecture": "宮城県",
+    "location": "{\"coordinates\":[140.855,38.253],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pyybsea23erzws4s0vcj",
+    "createdAt": "2026-04-23T12:40:50.891Z",
+    "updatedAt": "2026-04-23T12:40:50.891Z",
+    "title": "久保田城",
+    "description": "佐竹氏の居城、土造りの平山城。日本100名城 No.9。",
+    "category": "城郭",
+    "prefecture": "秋田県",
+    "location": "{\"coordinates\":[140.113,39.721],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pz23580q5c606bxg5f9j",
+    "createdAt": "2026-04-23T12:40:51.011Z",
+    "updatedAt": "2026-04-23T12:40:51.011Z",
+    "title": "山形城",
+    "description": "最上義光の居城、東北最大級の平城。日本100名城 No.10。",
+    "category": "城郭",
+    "prefecture": "山形県",
+    "location": "{\"coordinates\":[140.339,38.254],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pz7fpmswp6kvq9ty6xs6",
+    "createdAt": "2026-04-23T12:40:51.183Z",
+    "updatedAt": "2026-04-23T12:40:51.183Z",
+    "title": "二本松城",
+    "description": "戊辰戦争で少年隊が戦った城。日本100名城 No.11。",
+    "category": "城郭",
+    "prefecture": "福島県",
+    "location": "{\"coordinates\":[140.432,37.591],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pzhskkfkfnffzmahyccg",
+    "createdAt": "2026-04-23T12:40:51.513Z",
+    "updatedAt": "2026-04-23T12:40:51.513Z",
+    "title": "会津若松城",
+    "description": "戊辰戦争籠城戦の舞台、鶴ヶ城。日本100名城 No.12。",
+    "category": "城郭",
+    "prefecture": "福島県",
+    "location": "{\"coordinates\":[139.93,37.488],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pzq7tq6skems7qkgn2bw",
+    "createdAt": "2026-04-23T12:40:51.687Z",
+    "updatedAt": "2026-04-23T12:40:51.687Z",
+    "title": "白河小峰城",
+    "description": "奥州関門の要害、総石垣の近世城郭。日本100名城 No.13。",
+    "category": "城郭",
+    "prefecture": "福島県",
+    "location": "{\"coordinates\":[140.218,37.134],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5pzzb6nbgvq1bgpyq1ccm",
+    "createdAt": "2026-04-23T12:40:51.947Z",
+    "updatedAt": "2026-04-23T12:40:51.947Z",
+    "title": "水戸城",
+    "description": "徳川御三家水戸徳川家の居城。日本100名城 No.14。",
+    "category": "城郭",
+    "prefecture": "茨城県",
+    "location": "{\"coordinates\":[140.478,36.376],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q042b050p92xrsd6xf2b",
+    "createdAt": "2026-04-23T12:40:52.098Z",
+    "updatedAt": "2026-04-23T12:40:52.098Z",
+    "title": "足利氏館",
+    "description": "足利氏発祥の地、方形の館。日本100名城 No.15。",
+    "category": "城郭",
+    "prefecture": "栃木県",
+    "location": "{\"coordinates\":[139.454,36.336],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q09hxtytrz577mgyf3qd",
+    "createdAt": "2026-04-23T12:40:52.273Z",
+    "updatedAt": "2026-04-23T12:40:52.273Z",
+    "title": "箕輪城",
+    "description": "長野氏・井伊直政の城、堀と土塁の巨大山城。日本100名城 No.16。",
+    "category": "城郭",
+    "prefecture": "群馬県",
+    "location": "{\"coordinates\":[138.932,36.404],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q0gdc0w6vt8c3sr3nkb7",
+    "createdAt": "2026-04-23T12:40:52.493Z",
+    "updatedAt": "2026-04-23T12:40:52.493Z",
+    "title": "金山城",
+    "description": "新田一族の本城、石垣主体の中世山城。日本100名城 No.17。",
+    "category": "城郭",
+    "prefecture": "群馬県",
+    "location": "{\"coordinates\":[139.381,36.302],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q0vjj73sy591p9kpmmjv",
+    "createdAt": "2026-04-23T12:40:52.85Z",
+    "updatedAt": "2026-04-23T12:40:52.85Z",
+    "title": "鉢形城",
+    "description": "北条氏邦の居城、荒川断崖の要害。日本100名城 No.18。",
+    "category": "城郭",
+    "prefecture": "埼玉県",
+    "location": "{\"coordinates\":[139.184,36.121],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q15qvk2g9hq30t9pdn7s",
+    "createdAt": "2026-04-23T12:40:53.175Z",
+    "updatedAt": "2026-04-23T12:40:53.175Z",
+    "title": "川越城",
+    "description": "関東七名城の一、本丸御殿が現存。日本100名城 No.19。",
+    "category": "城郭",
+    "prefecture": "埼玉県",
+    "location": "{\"coordinates\":[139.489,35.925],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q1b31xsw4g9fhxz6trfz",
+    "createdAt": "2026-04-23T12:40:53.347Z",
+    "updatedAt": "2026-04-23T12:40:53.347Z",
+    "title": "佐倉城",
+    "description": "老中の城として栄えた土造りの城。日本100名城 No.20。",
+    "category": "城郭",
+    "prefecture": "千葉県",
+    "location": "{\"coordinates\":[140.222,35.727],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q1g6rpjp63dxps98pnvf",
+    "createdAt": "2026-04-23T12:40:53.51Z",
+    "updatedAt": "2026-04-23T12:40:53.51Z",
+    "title": "江戸城",
+    "description": "徳川幕府の本城、現在の皇居。日本100名城 No.21。",
+    "category": "城郭",
+    "prefecture": "東京都",
+    "location": "{\"coordinates\":[139.754,35.685],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q1t5qqjtjg94w6rcdjt5",
+    "createdAt": "2026-04-23T12:40:53.829Z",
+    "updatedAt": "2026-04-23T12:40:53.829Z",
+    "title": "八王子城",
+    "description": "北条氏照の山城、豊臣秀吉に攻め落とされた。日本100名城 No.22。",
+    "category": "城郭",
+    "prefecture": "東京都",
+    "location": "{\"coordinates\":[139.237,35.658],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q20wqx2de3b11bf40brw",
+    "createdAt": "2026-04-23T12:40:54.044Z",
+    "updatedAt": "2026-04-23T12:40:54.044Z",
+    "title": "小田原城",
+    "description": "北条氏五代の本拠、関東最大の城。日本100名城 No.23。",
+    "category": "城郭",
+    "prefecture": "神奈川県",
+    "location": "{\"coordinates\":[139.154,35.25],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q25ac40m34zjfyznr9r1",
+    "createdAt": "2026-04-23T12:40:54.186Z",
+    "updatedAt": "2026-04-23T12:40:54.186Z",
+    "title": "武田氏館",
+    "description": "武田信玄の居館「躑躅ヶ崎館」。日本100名城 No.24。",
+    "category": "城郭",
+    "prefecture": "山梨県",
+    "location": "{\"coordinates\":[138.59,35.672],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q2b0vyfxvft53s8tpg8y",
+    "createdAt": "2026-04-23T12:40:54.368Z",
+    "updatedAt": "2026-04-23T12:40:54.368Z",
+    "title": "甲府城",
+    "description": "甲斐の要石、浅野氏・徳川氏が整備。日本100名城 No.25。",
+    "category": "城郭",
+    "prefecture": "山梨県",
+    "location": "{\"coordinates\":[138.569,35.664],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q2mefth5ktzddh9en2cd",
+    "createdAt": "2026-04-23T12:40:54.67Z",
+    "updatedAt": "2026-04-23T12:40:54.67Z",
+    "title": "松代城",
+    "description": "真田家の居城「海津城」。日本100名城 No.26。",
+    "category": "城郭",
+    "prefecture": "長野県",
+    "location": "{\"coordinates\":[138.193,36.564],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q2t72x4m6fyt53cbkhz7",
+    "createdAt": "2026-04-23T12:40:54.855Z",
+    "updatedAt": "2026-04-23T12:40:54.855Z",
+    "title": "上田城",
+    "description": "真田昌幸の城、2 度の徳川勢撃退。日本100名城 No.27。",
+    "category": "城郭",
+    "prefecture": "長野県",
+    "location": "{\"coordinates\":[138.249,36.403],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q35c75k54z2axxscnwfd",
+    "createdAt": "2026-04-23T12:40:55.212Z",
+    "updatedAt": "2026-04-23T12:40:55.212Z",
+    "title": "小諸城",
+    "description": "浅間山麓の穴城、石垣と堀が残る。日本100名城 No.28。",
+    "category": "城郭",
+    "prefecture": "長野県",
+    "location": "{\"coordinates\":[138.422,36.326],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q39fekbjdqr2ezdsqbsk",
+    "createdAt": "2026-04-23T12:40:55.343Z",
+    "updatedAt": "2026-04-23T12:40:55.343Z",
+    "title": "松本城",
+    "description": "黒い下見板張の現存天守「烏城」。日本100名城 No.29。",
+    "category": "城郭",
+    "prefecture": "長野県",
+    "location": "{\"coordinates\":[137.969,36.239],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q3defxke2ynfgxmqyf5z",
+    "createdAt": "2026-04-23T12:40:55.47Z",
+    "updatedAt": "2026-04-23T12:40:55.47Z",
+    "title": "高遠城",
+    "description": "桜の名所、武田氏ゆかりの山城。日本100名城 No.30。",
+    "category": "城郭",
+    "prefecture": "長野県",
+    "location": "{\"coordinates\":[138.048,35.831],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q3j74n23x3b7k557c7cx",
+    "createdAt": "2026-04-23T12:40:55.623Z",
+    "updatedAt": "2026-04-23T12:40:55.623Z",
+    "title": "新発田城",
+    "description": "三階櫓が 3 つの鯱を持つ珍城。日本100名城 No.31。",
+    "category": "城郭",
+    "prefecture": "新潟県",
+    "location": "{\"coordinates\":[139.328,37.953],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q3pg92bp8hkymwfrb6dd",
+    "createdAt": "2026-04-23T12:40:55.76Z",
+    "updatedAt": "2026-04-23T12:40:55.76Z",
+    "title": "春日山城",
+    "description": "上杉謙信の本城、巨大山城。日本100名城 No.32。",
+    "category": "城郭",
+    "prefecture": "新潟県",
+    "location": "{\"coordinates\":[138.223,37.128],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q3vndc9zc9j4ajr66tpw",
+    "createdAt": "2026-04-23T12:40:55.925Z",
+    "updatedAt": "2026-04-23T12:40:55.925Z",
+    "title": "高岡城",
+    "description": "前田利長の隠居城、広大な水堀。日本100名城 No.33。",
+    "category": "城郭",
+    "prefecture": "富山県",
+    "location": "{\"coordinates\":[137.024,36.748],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q45adt4j255fnq4v4q9w",
+    "createdAt": "2026-04-23T12:40:56.234Z",
+    "updatedAt": "2026-04-23T12:40:56.234Z",
+    "title": "七尾城",
+    "description": "畠山氏の本城、能登半島随一の山城。日本100名城 No.34。",
+    "category": "城郭",
+    "prefecture": "石川県",
+    "location": "{\"coordinates\":[136.969,37.016],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q4addtb1n8pd74mq7fvb",
+    "createdAt": "2026-04-23T12:40:56.397Z",
+    "updatedAt": "2026-04-23T12:40:56.397Z",
+    "title": "金沢城",
+    "description": "加賀百万石前田家の居城、兼六園隣接。日本100名城 No.35。",
+    "category": "城郭",
+    "prefecture": "石川県",
+    "location": "{\"coordinates\":[136.66,36.565],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q4fzvsf2qj691f8d3rr7",
+    "createdAt": "2026-04-23T12:40:56.575Z",
+    "updatedAt": "2026-04-23T12:40:56.575Z",
+    "title": "丸岡城",
+    "description": "日本最古とも言われる現存天守。日本100名城 No.36。",
+    "category": "城郭",
+    "prefecture": "福井県",
+    "location": "{\"coordinates\":[136.275,36.152],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q4me07vgzqc49yc09qf2",
+    "createdAt": "2026-04-23T12:40:56.718Z",
+    "updatedAt": "2026-04-23T12:40:56.718Z",
+    "title": "一乗谷朝倉氏遺跡",
+    "description": "朝倉氏の城下町遺跡、国の特別史跡。日本100名城 No.37。",
+    "category": "城郭",
+    "prefecture": "福井県",
+    "location": "{\"coordinates\":[136.3,36.008],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q4s82exhvtsfztf8r36x",
+    "createdAt": "2026-04-23T12:40:56.872Z",
+    "updatedAt": "2026-04-23T12:40:56.872Z",
+    "title": "岩村城",
+    "description": "日本三大山城、標高 717 m。日本100名城 No.38。",
+    "category": "城郭",
+    "prefecture": "岐阜県",
+    "location": "{\"coordinates\":[137.449,35.367],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q4zd4xtffqrpmjf1kjbx",
+    "createdAt": "2026-04-23T12:40:57.069Z",
+    "updatedAt": "2026-04-23T12:40:57.069Z",
+    "title": "岐阜城",
+    "description": "織田信長の天下布武の拠点、金華山頂。日本100名城 No.39。",
+    "category": "城郭",
+    "prefecture": "岐阜県",
+    "location": "{\"coordinates\":[136.782,35.434],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q54b0k641m8t0jed2x7f",
+    "createdAt": "2026-04-23T12:40:57.227Z",
+    "updatedAt": "2026-04-23T12:40:57.227Z",
+    "title": "山中城",
+    "description": "北条氏の山城、障子堀・畝堀で有名。日本100名城 No.40。",
+    "category": "城郭",
+    "prefecture": "静岡県",
+    "location": "{\"coordinates\":[138.938,35.134],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q5aap58wtfzpgzhmt1s0",
+    "createdAt": "2026-04-23T12:40:57.418Z",
+    "updatedAt": "2026-04-23T12:40:57.418Z",
+    "title": "駿府城",
+    "description": "徳川家康の隠居城。日本100名城 No.41。",
+    "category": "城郭",
+    "prefecture": "静岡県",
+    "location": "{\"coordinates\":[138.383,34.977],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q5g6n27n9jsrscf0brw2",
+    "createdAt": "2026-04-23T12:40:57.606Z",
+    "updatedAt": "2026-04-23T12:40:57.606Z",
+    "title": "掛川城",
+    "description": "山内一豊が築いた東海の名城。日本100名城 No.42。",
+    "category": "城郭",
+    "prefecture": "静岡県",
+    "location": "{\"coordinates\":[138.014,34.769],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q5wj3t9rm0p9kjvhhgdf",
+    "createdAt": "2026-04-23T12:40:58.002Z",
+    "updatedAt": "2026-04-23T12:40:58.002Z",
+    "title": "犬山城",
+    "description": "木曽川畔の現存天守、国宝。日本100名城 No.43。",
+    "category": "城郭",
+    "prefecture": "愛知県",
+    "location": "{\"coordinates\":[136.939,35.388],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q66nb407jdf5vygr1wvw",
+    "createdAt": "2026-04-23T12:40:58.325Z",
+    "updatedAt": "2026-04-23T12:40:58.325Z",
+    "title": "名古屋城",
+    "description": "金のシャチホコの尾張徳川家の城。日本100名城 No.44。",
+    "category": "城郭",
+    "prefecture": "愛知県",
+    "location": "{\"coordinates\":[136.9,35.187],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q6czddcqxpzwwkganf6c",
+    "createdAt": "2026-04-23T12:40:58.527Z",
+    "updatedAt": "2026-04-23T12:40:58.527Z",
+    "title": "岡崎城",
+    "description": "徳川家康生誕の地。日本100名城 No.45。",
+    "category": "城郭",
+    "prefecture": "愛知県",
+    "location": "{\"coordinates\":[137.158,34.955],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q6ptyb5t9ad48s8c08ex",
+    "createdAt": "2026-04-23T12:40:58.842Z",
+    "updatedAt": "2026-04-23T12:40:58.842Z",
+    "title": "長篠城",
+    "description": "長篠の戦いの舞台、武田勝頼敗れる。日本100名城 No.46。",
+    "category": "城郭",
+    "prefecture": "愛知県",
+    "location": "{\"coordinates\":[137.561,34.922],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q7077b1qrezt20mcnzzv",
+    "createdAt": "2026-04-23T12:40:59.143Z",
+    "updatedAt": "2026-04-23T12:40:59.143Z",
+    "title": "伊賀上野城",
+    "description": "藤堂高虎築城、高石垣で有名。日本100名城 No.47。",
+    "category": "城郭",
+    "prefecture": "三重県",
+    "location": "{\"coordinates\":[136.137,34.77],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q74vhxvw5rks9v7yed2k",
+    "createdAt": "2026-04-23T12:40:59.291Z",
+    "updatedAt": "2026-04-23T12:40:59.291Z",
+    "title": "松阪城",
+    "description": "蒲生氏郷が築いた石垣の城。日本100名城 No.48。",
+    "category": "城郭",
+    "prefecture": "三重県",
+    "location": "{\"coordinates\":[136.527,34.579],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q79mgevvjh2gwhvr1vf6",
+    "createdAt": "2026-04-23T12:40:59.444Z",
+    "updatedAt": "2026-04-23T12:40:59.444Z",
+    "title": "小谷城",
+    "description": "浅井長政の城、戦国五大山城の一。日本100名城 No.49。",
+    "category": "城郭",
+    "prefecture": "滋賀県",
+    "location": "{\"coordinates\":[136.27,35.475],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q7dvfbw8xgrtjrfgatbt",
+    "createdAt": "2026-04-23T12:40:59.579Z",
+    "updatedAt": "2026-04-23T12:40:59.579Z",
+    "title": "彦根城",
+    "description": "井伊家の居城、現存天守・国宝。日本100名城 No.50。",
+    "category": "城郭",
+    "prefecture": "滋賀県",
+    "location": "{\"coordinates\":[136.251,35.277],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q7mewdac6qn0w6vpd123",
+    "createdAt": "2026-04-23T12:40:59.79Z",
+    "updatedAt": "2026-04-23T12:40:59.79Z",
+    "title": "安土城",
+    "description": "織田信長の天下の象徴、石垣のみ残存。日本100名城 No.51。",
+    "category": "城郭",
+    "prefecture": "滋賀県",
+    "location": "{\"coordinates\":[136.139,35.156],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q7s24nsxf7ng3zsprf7q",
+    "createdAt": "2026-04-23T12:40:59.938Z",
+    "updatedAt": "2026-04-23T12:40:59.938Z",
+    "title": "観音寺城",
+    "description": "六角氏の本城、巨大な山城。日本100名城 No.52。",
+    "category": "城郭",
+    "prefecture": "滋賀県",
+    "location": "{\"coordinates\":[136.178,35.137],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q7zdgsn4teeyfkyvfv6r",
+    "createdAt": "2026-04-23T12:41:00.141Z",
+    "updatedAt": "2026-04-23T12:41:00.141Z",
+    "title": "二条城",
+    "description": "徳川家の京都の拠点、世界遺産。日本100名城 No.53。",
+    "category": "城郭",
+    "prefecture": "京都府",
+    "location": "{\"coordinates\":[135.748,35.014],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q8a1zt4c9cqvdqmdmyv1",
+    "createdAt": "2026-04-23T12:41:00.481Z",
+    "updatedAt": "2026-04-23T12:41:00.481Z",
+    "title": "大坂城",
+    "description": "豊臣秀吉築城、徳川期の再建天守。日本100名城 No.54。",
+    "category": "城郭",
+    "prefecture": "大阪府",
+    "location": "{\"coordinates\":[135.526,34.687],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q8f61akk40e82vt6x48z",
+    "createdAt": "2026-04-23T12:41:00.646Z",
+    "updatedAt": "2026-04-23T12:41:00.646Z",
+    "title": "千早城",
+    "description": "楠木正成の山城。日本100名城 No.55。",
+    "category": "城郭",
+    "prefecture": "大阪府",
+    "location": "{\"coordinates\":[135.642,34.418],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q8r15rwh124kzs2gxfer",
+    "createdAt": "2026-04-23T12:41:00.929Z",
+    "updatedAt": "2026-04-23T12:41:00.929Z",
+    "title": "竹田城",
+    "description": "雲海に浮かぶ「天空の城」。日本100名城 No.56。",
+    "category": "城郭",
+    "prefecture": "兵庫県",
+    "location": "{\"coordinates\":[134.829,35.301],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q97g0nn9d0q445bvhv50",
+    "createdAt": "2026-04-23T12:41:01.424Z",
+    "updatedAt": "2026-04-23T12:41:01.424Z",
+    "title": "篠山城",
+    "description": "徳川家康が西国抑えのため築かせた城。日本100名城 No.57。",
+    "category": "城郭",
+    "prefecture": "兵庫県",
+    "location": "{\"coordinates\":[135.218,35.074],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q9jnf6fx6r8y5c12z30c",
+    "createdAt": "2026-04-23T12:41:01.781Z",
+    "updatedAt": "2026-04-23T12:41:01.781Z",
+    "title": "明石城",
+    "description": "双子櫓が象徴的な西国監視の城。日本100名城 No.58。",
+    "category": "城郭",
+    "prefecture": "兵庫県",
+    "location": "{\"coordinates\":[134.992,34.65],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q9qf8dm63xrqdsa0rgsa",
+    "createdAt": "2026-04-23T12:41:01.935Z",
+    "updatedAt": "2026-04-23T12:41:01.935Z",
+    "title": "赤穂城",
+    "description": "赤穂浪士ゆかりの城。日本100名城 No.60。",
+    "category": "城郭",
+    "prefecture": "兵庫県",
+    "location": "{\"coordinates\":[134.387,34.747],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5q9x3b6yzc3np61abpjdw",
+    "createdAt": "2026-04-23T12:41:02.115Z",
+    "updatedAt": "2026-04-23T12:41:02.115Z",
+    "title": "高取城",
+    "description": "日本三大山城、標高 584 m。日本100名城 No.61。",
+    "category": "城郭",
+    "prefecture": "奈良県",
+    "location": "{\"coordinates\":[135.821,34.431],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qa1tbsjsgrkdmqct3nmf",
+    "createdAt": "2026-04-23T12:41:02.266Z",
+    "updatedAt": "2026-04-23T12:41:02.266Z",
+    "title": "和歌山城",
+    "description": "紀州徳川家の居城。日本100名城 No.62。",
+    "category": "城郭",
+    "prefecture": "和歌山県",
+    "location": "{\"coordinates\":[135.172,34.227],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qa6fbe4tf72vvg5kq40c",
+    "createdAt": "2026-04-23T12:41:02.415Z",
+    "updatedAt": "2026-04-23T12:41:02.415Z",
+    "title": "鳥取城",
+    "description": "久松山の山城、羽柴秀吉の兵糧攻めで有名。日本100名城 No.63。",
+    "category": "城郭",
+    "prefecture": "鳥取県",
+    "location": "{\"coordinates\":[134.249,35.504],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qabakqxsk65rsbna8gzc",
+    "createdAt": "2026-04-23T12:41:02.57Z",
+    "updatedAt": "2026-04-23T12:41:02.57Z",
+    "title": "松江城",
+    "description": "現存天守、松江市街のシンボル。日本100名城 No.64。",
+    "category": "城郭",
+    "prefecture": "島根県",
+    "location": "{\"coordinates\":[133.05,35.475],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qah54q9q76n9g7pcxzpc",
+    "createdAt": "2026-04-23T12:41:02.757Z",
+    "updatedAt": "2026-04-23T12:41:02.757Z",
+    "title": "月山富田城",
+    "description": "尼子氏の本城、中国地方屈指の山城。日本100名城 No.65。",
+    "category": "城郭",
+    "prefecture": "島根県",
+    "location": "{\"coordinates\":[133.202,35.422],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qawdxsnbxd88z6ty8tja",
+    "createdAt": "2026-04-23T12:41:03.117Z",
+    "updatedAt": "2026-04-23T12:41:03.117Z",
+    "title": "津和野城",
+    "description": "雲海の山城、石垣のみ残る。日本100名城 No.66。",
+    "category": "城郭",
+    "prefecture": "島根県",
+    "location": "{\"coordinates\":[131.766,34.461],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qb8xydtnjgkyvc454j77",
+    "createdAt": "2026-04-23T12:41:03.517Z",
+    "updatedAt": "2026-04-23T12:41:03.517Z",
+    "title": "津山城",
+    "description": "桜の名所、総石垣の近世城郭。日本100名城 No.67。",
+    "category": "城郭",
+    "prefecture": "岡山県",
+    "location": "{\"coordinates\":[134.003,35.066],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qbej4ag09th4t0y6qzrx",
+    "createdAt": "2026-04-23T12:41:03.698Z",
+    "updatedAt": "2026-04-23T12:41:03.698Z",
+    "title": "備中松山城",
+    "description": "現存天守で唯一の山城。日本100名城 No.68。",
+    "category": "城郭",
+    "prefecture": "岡山県",
+    "location": "{\"coordinates\":[133.618,34.808],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qbsv3vp8te00b8gy1fhs",
+    "createdAt": "2026-04-23T12:41:04.059Z",
+    "updatedAt": "2026-04-23T12:41:04.059Z",
+    "title": "鬼ノ城",
+    "description": "古代山城、桃太郎伝説ゆかり。日本100名城 No.69。",
+    "category": "城郭",
+    "prefecture": "岡山県",
+    "location": "{\"coordinates\":[133.776,34.709],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qc4jcfy2gndx5md3v5jp",
+    "createdAt": "2026-04-23T12:41:04.402Z",
+    "updatedAt": "2026-04-23T12:41:04.402Z",
+    "title": "岡山城",
+    "description": "黒漆塗りの天守「烏城」。日本100名城 No.70。",
+    "category": "城郭",
+    "prefecture": "岡山県",
+    "location": "{\"coordinates\":[133.936,34.665],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qcesxzks5heb0zdw2zyh",
+    "createdAt": "2026-04-23T12:41:04.729Z",
+    "updatedAt": "2026-04-23T12:41:04.729Z",
+    "title": "福山城",
+    "description": "水野勝成の居城、伏見櫓が現存。日本100名城 No.71。",
+    "category": "城郭",
+    "prefecture": "広島県",
+    "location": "{\"coordinates\":[133.362,34.493],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qckbj71cn3fp72hz9d4y",
+    "createdAt": "2026-04-23T12:41:04.875Z",
+    "updatedAt": "2026-04-23T12:41:04.875Z",
+    "title": "郡山城",
+    "description": "毛利元就の本城、戦国屈指の山城。日本100名城 No.72。",
+    "category": "城郭",
+    "prefecture": "広島県",
+    "location": "{\"coordinates\":[132.698,34.677],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qcswjtg6zv4mnf4dn8k7",
+    "createdAt": "2026-04-23T12:41:05.084Z",
+    "updatedAt": "2026-04-23T12:41:05.084Z",
+    "title": "広島城",
+    "description": "毛利輝元が築いた平城、原爆で天守焼失。日本100名城 No.73。",
+    "category": "城郭",
+    "prefecture": "広島県",
+    "location": "{\"coordinates\":[132.458,34.402],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qd54hh12v5hs5qgvcyb9",
+    "createdAt": "2026-04-23T12:41:05.444Z",
+    "updatedAt": "2026-04-23T12:41:05.444Z",
+    "title": "岩国城",
+    "description": "錦帯橋を見下ろす山上の城。日本100名城 No.74。",
+    "category": "城郭",
+    "prefecture": "山口県",
+    "location": "{\"coordinates\":[132.178,34.175],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qdae4tdatmnjjt2h87xv",
+    "createdAt": "2026-04-23T12:41:05.614Z",
+    "updatedAt": "2026-04-23T12:41:05.614Z",
+    "title": "萩城",
+    "description": "毛利氏長州藩の居城。日本100名城 No.75。",
+    "category": "城郭",
+    "prefecture": "山口県",
+    "location": "{\"coordinates\":[131.383,34.424],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qdf1q5qxpb1b6y69x50e",
+    "createdAt": "2026-04-23T12:41:05.761Z",
+    "updatedAt": "2026-04-23T12:41:05.761Z",
+    "title": "徳島城",
+    "description": "蜂須賀家政の城。日本100名城 No.76。",
+    "category": "城郭",
+    "prefecture": "徳島県",
+    "location": "{\"coordinates\":[134.556,34.073],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qdkkwrq1k3n9ysd46ham",
+    "createdAt": "2026-04-23T12:41:05.907Z",
+    "updatedAt": "2026-04-23T12:41:05.907Z",
+    "title": "高松城",
+    "description": "海水を引き入れた水城。日本100名城 No.77。",
+    "category": "城郭",
+    "prefecture": "香川県",
+    "location": "{\"coordinates\":[134.051,34.351],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qdt7d81d52h65r0evyfv",
+    "createdAt": "2026-04-23T12:41:06.119Z",
+    "updatedAt": "2026-04-23T12:41:06.119Z",
+    "title": "丸亀城",
+    "description": "現存天守、日本一高い石垣。日本100名城 No.78。",
+    "category": "城郭",
+    "prefecture": "香川県",
+    "location": "{\"coordinates\":[133.798,34.288],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qe0f15wgf11ar0h5ebn2",
+    "createdAt": "2026-04-23T12:41:06.319Z",
+    "updatedAt": "2026-04-23T12:41:06.319Z",
+    "title": "今治城",
+    "description": "藤堂高虎の水城。日本100名城 No.79。",
+    "category": "城郭",
+    "prefecture": "愛媛県",
+    "location": "{\"coordinates\":[133,34.066],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qebpmxk6p3yde4cdpx26",
+    "createdAt": "2026-04-23T12:41:06.678Z",
+    "updatedAt": "2026-04-23T12:41:06.678Z",
+    "title": "湯築城",
+    "description": "河野氏の居館、道後温泉隣接。日本100名城 No.80。",
+    "category": "城郭",
+    "prefecture": "愛媛県",
+    "location": "{\"coordinates\":[132.785,33.843],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qefnhqgd2eaqqxsfatym",
+    "createdAt": "2026-04-23T12:41:06.805Z",
+    "updatedAt": "2026-04-23T12:41:06.805Z",
+    "title": "松山城",
+    "description": "現存天守、勝山山頂。日本100名城 No.81。",
+    "category": "城郭",
+    "prefecture": "愛媛県",
+    "location": "{\"coordinates\":[132.766,33.845],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qemmkwk8zjrhkvpgz5md",
+    "createdAt": "2026-04-23T12:41:06.964Z",
+    "updatedAt": "2026-04-23T12:41:06.964Z",
+    "title": "大洲城",
+    "description": "木造復元天守。日本100名城 No.82。",
+    "category": "城郭",
+    "prefecture": "愛媛県",
+    "location": "{\"coordinates\":[132.545,33.51],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qetfga7qbtpvtw2sapyt",
+    "createdAt": "2026-04-23T12:41:07.151Z",
+    "updatedAt": "2026-04-23T12:41:07.151Z",
+    "title": "宇和島城",
+    "description": "藤堂高虎築城、現存天守。日本100名城 No.83。",
+    "category": "城郭",
+    "prefecture": "愛媛県",
+    "location": "{\"coordinates\":[132.566,33.221],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qf0g9yhrkrp1v9k52mtg",
+    "createdAt": "2026-04-23T12:41:07.344Z",
+    "updatedAt": "2026-04-23T12:41:07.344Z",
+    "title": "高知城",
+    "description": "山内一豊の城、現存天守と本丸御殿。日本100名城 No.84。",
+    "category": "城郭",
+    "prefecture": "高知県",
+    "location": "{\"coordinates\":[133.531,33.561],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qf6qwfd5bpzdpe67wvsm",
+    "createdAt": "2026-04-23T12:41:07.543Z",
+    "updatedAt": "2026-04-23T12:41:07.543Z",
+    "title": "福岡城",
+    "description": "黒田長政築城、別名舞鶴城。日本100名城 No.85。",
+    "category": "城郭",
+    "prefecture": "福岡県",
+    "location": "{\"coordinates\":[130.382,33.586],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qfh9ppd779q23pth3brq",
+    "createdAt": "2026-04-23T12:41:07.881Z",
+    "updatedAt": "2026-04-23T12:41:07.881Z",
+    "title": "大野城",
+    "description": "古代山城、大宰府防衛のため築城。日本100名城 No.86。",
+    "category": "城郭",
+    "prefecture": "福岡県",
+    "location": "{\"coordinates\":[130.505,33.54],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qfwj3f3ba7n0f0fv0vdg",
+    "createdAt": "2026-04-23T12:41:08.242Z",
+    "updatedAt": "2026-04-23T12:41:08.242Z",
+    "title": "名護屋城",
+    "description": "豊臣秀吉が朝鮮出兵拠点に築いた巨城。日本100名城 No.87。",
+    "category": "城郭",
+    "prefecture": "佐賀県",
+    "location": "{\"coordinates\":[129.852,33.534],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qgd2629gm0tah4ekte3t",
+    "createdAt": "2026-04-23T12:41:08.77Z",
+    "updatedAt": "2026-04-23T12:41:08.77Z",
+    "title": "吉野ヶ里",
+    "description": "弥生時代の環濠集落。日本100名城 No.88。",
+    "category": "城郭",
+    "prefecture": "佐賀県",
+    "location": "{\"coordinates\":[130.383,33.327],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qgtva2ettbfhy5tgzgqv",
+    "createdAt": "2026-04-23T12:41:09.211Z",
+    "updatedAt": "2026-04-23T12:41:09.211Z",
+    "title": "佐賀城",
+    "description": "鍋島氏の居城、鯱の門が現存。日本100名城 No.89。",
+    "category": "城郭",
+    "prefecture": "佐賀県",
+    "location": "{\"coordinates\":[130.301,33.242],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qh5vdv3e0fpcn8z3xpmq",
+    "createdAt": "2026-04-23T12:41:09.563Z",
+    "updatedAt": "2026-04-23T12:41:09.563Z",
+    "title": "平戸城",
+    "description": "松浦氏の居城、平戸湾に面する海城。日本100名城 No.90。",
+    "category": "城郭",
+    "prefecture": "長崎県",
+    "location": "{\"coordinates\":[129.554,33.368],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qhd687hrwv9qadctz0h2",
+    "createdAt": "2026-04-23T12:41:09.798Z",
+    "updatedAt": "2026-04-23T12:41:09.798Z",
+    "title": "島原城",
+    "description": "島原の乱の舞台。日本100名城 No.91。",
+    "category": "城郭",
+    "prefecture": "長崎県",
+    "location": "{\"coordinates\":[130.36,32.787],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qhr1650t4ba1f6dyz16b",
+    "createdAt": "2026-04-23T12:41:10.145Z",
+    "updatedAt": "2026-04-23T12:41:10.145Z",
+    "title": "熊本城",
+    "description": "加藤清正築城、日本三名城の一。日本100名城 No.92。",
+    "category": "城郭",
+    "prefecture": "熊本県",
+    "location": "{\"coordinates\":[130.705,32.806],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qhx5wf1k5sybqxs38m2w",
+    "createdAt": "2026-04-23T12:41:10.309Z",
+    "updatedAt": "2026-04-23T12:41:10.309Z",
+    "title": "人吉城",
+    "description": "相良氏の居城、独特な武者返し石垣。日本100名城 No.93。",
+    "category": "城郭",
+    "prefecture": "熊本県",
+    "location": "{\"coordinates\":[130.762,32.208],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qj2gbhmyway3wbbf3eds",
+    "createdAt": "2026-04-23T12:41:10.48Z",
+    "updatedAt": "2026-04-23T12:41:10.48Z",
+    "title": "大分府内城",
+    "description": "大友氏の後、竹中氏が完成。日本100名城 No.94。",
+    "category": "城郭",
+    "prefecture": "大分県",
+    "location": "{\"coordinates\":[131.612,33.239],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qj72939tn5nhbwvbabwy",
+    "createdAt": "2026-04-23T12:41:10.626Z",
+    "updatedAt": "2026-04-23T12:41:10.626Z",
+    "title": "岡城",
+    "description": "瀧廉太郎「荒城の月」のモデルと言われる山城。日本100名城 No.95。",
+    "category": "城郭",
+    "prefecture": "大分県",
+    "location": "{\"coordinates\":[131.392,32.974],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qje9tth9f3p5brgjjr35",
+    "createdAt": "2026-04-23T12:41:10.857Z",
+    "updatedAt": "2026-04-23T12:41:10.857Z",
+    "title": "飫肥城",
+    "description": "伊東氏の城下町が残る。日本100名城 No.96。",
+    "category": "城郭",
+    "prefecture": "宮崎県",
+    "location": "{\"coordinates\":[131.351,31.624],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qjrbdn55a4jgngahf2dp",
+    "createdAt": "2026-04-23T12:41:11.179Z",
+    "updatedAt": "2026-04-23T12:41:11.179Z",
+    "title": "鹿児島城",
+    "description": "島津氏の居城「鶴丸城」。日本100名城 No.97。",
+    "category": "城郭",
+    "prefecture": "鹿児島県",
+    "location": "{\"coordinates\":[130.557,31.599],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qjx9zfwf3mtz0rmdeq6q",
+    "createdAt": "2026-04-23T12:41:11.337Z",
+    "updatedAt": "2026-04-23T12:41:11.337Z",
+    "title": "今帰仁城",
+    "description": "北山王の居城、世界遺産。日本100名城 No.98。",
+    "category": "城郭",
+    "prefecture": "沖縄県",
+    "location": "{\"coordinates\":[127.931,26.694],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qk2vfm0sz2qc0djx23nx",
+    "createdAt": "2026-04-23T12:41:11.515Z",
+    "updatedAt": "2026-04-23T12:41:11.515Z",
+    "title": "中城城",
+    "description": "琉球王国のグスク、世界遺産。日本100名城 No.99。",
+    "category": "城郭",
+    "prefecture": "沖縄県",
+    "location": "{\"coordinates\":[127.811,26.284],\"type\":\"Point\"}"
+  },
+  {
+    "id": "01kpx5qkenpng7zm2hrdmb5rsz",
+    "createdAt": "2026-04-23T12:41:11.893Z",
+    "updatedAt": "2026-04-23T12:41:11.893Z",
+    "title": "首里城",
+    "description": "琉球王国の王城、世界遺産 (再建中)。日本100名城 No.100。",
+    "category": "城郭",
+    "prefecture": "沖縄県",
+    "location": "{\"coordinates\":[127.72,26.217],\"type\":\"Point\"}"
+  }
+]
