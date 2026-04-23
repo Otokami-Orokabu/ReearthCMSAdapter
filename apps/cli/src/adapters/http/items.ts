@@ -5,10 +5,11 @@ import { registerPathParamValidators, withListOpts } from './internal/middleware
 /**
  * Router for /api/items.
  *
- *   GET  /:model/all   list draft + published items
- *   GET  /:model       list published items only
- *   GET  /:model/:id   get a single published item
- *   POST /:model       create an item (lands as draft)
+ *   GET   /:model/all   list draft + published items
+ *   GET   /:model       list published items only
+ *   GET   /:model/:id   get a single published item
+ *   POST  /:model       create an item (lands as draft)
+ *   PATCH /:id          partial update (only supplied fields change)
  *
  * The static /:model/all route must be declared before the catch-all
  * /:model so Express matches the specific path first.
@@ -59,6 +60,23 @@ export function createItemsRouter(client: ReearthClient): Router {
       }
       const created = await client.createItem(model, body);
       res.status(201).json(created);
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.patch('/:id', async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const body: unknown = req.body;
+      try {
+        assertCmsPayload(body);
+      } catch (e) {
+        res.status(400).json({ error: e instanceof Error ? e.message : String(e) });
+        return;
+      }
+      const updated = await client.updateItem(id, body);
+      res.json(updated);
     } catch (err) {
       next(err);
     }
